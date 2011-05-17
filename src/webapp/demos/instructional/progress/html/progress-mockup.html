@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../../../framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../../../framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../../../lib/jquery/plugins/tooltip/css/jquery.tooltip.css" />
+        <link rel="stylesheet" type="text/css" href="../../../lib/jquery/ui/css/jquery.ui.theme.css" />
+        <link rel="stylesheet" type="text/css" href="../../../components/inlineEdit/css/InlineEdit.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/examples.css" />
+        
+        <script type="text/javascript" src="../../../lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="../../../lib/jquery/ui/js/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="../../../lib/jquery/ui/js/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="../../../lib/jquery/ui/js/jquery.ui.position.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js" type="text/javascript"></script>
+
+        <script type="text/javascript" src="../../../framework/core/js/FluidDocument.js"></script>
+        <script type="text/javascript" src="../../../framework/core/js/jquery.keyboard-a11y.js"></script>
+        <script type="text/javascript" src="../../../framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="../../../components/progress/js/Progress.js"></script>
+        
+        <script type="text/javascript" src="../js/progress-support.js"></script>
+    <style>
+    .demo-container {
+        height: 70px;
+        width: 300px;
+    }
+    .demo-bar {
+        border: 1px solid #2D3E76;
+        width: 250px;
+    }
+    .demo-indicator {
+        height: 16px;
+        width: 5px;
+        border: 1px solid #2D3E76;
+        background-color: #7B7EAE;
+    }
+    </style>
+            <title>Customizing Progress</title>
+    </head>
+    <body>
+
+        <div class="header">
+            <h1>Fluid Infusion Documentation</h1>
+            <span class="link">Home</span>
+            <span class="link active">Developer Guide</span>
+            <span class="link">Component API</span>
+            <span class="link">Framework API</span>
+            <span class="link">Technical Reference</span>
+        </div>
+        
+        Home &gt; Developer Guide &gt; How do I... &gt; Customize Progress?
+        <h1>How Do I Customize Progress?</h1>
+
+<table>
+    <tr>
+        <td valign="top">
+            <div class="options-list">
+                <ul>
+                    <li><strong>Default</strong></li>
+                    <li>General</li>
+                    <ul>
+                        <li class="option-name">selectors</li>
+                        <li class="option-name">strings</li>
+                    </ul>
+                    <li>Behaviour</li>
+                    <ul>
+                        <li class="option-name">listeners</li>
+                        <li class="option-name">updatePosition</li>
+                        <li class="option-name">initiallyHidden</li>
+                        <li class="option-name">minWidth</li>
+                        <li class="option-name">speed</li>
+                        <li class="option-name">delay</li>
+                    </ul>
+                    <li>Animations</li>
+                    <ul>
+                        <li class="option-name">showAnimation</li>
+                        <li class="option-name">hideAnimation</li>
+                        <li class="option-name">animate</li>
+                    </ul>
+                </ul>
+            </div>
+        </td>
+
+        <td valign="top">
+            <div>
+                <h2>Defaults</h2>
+                <p>Click the button to start a progress indicator.</p>
+                <div class="example">
+                    <div id="progress-demo-1" class="demo-container">
+                        <button id="showButton1">Show...</button>
+                        <div class="flc-progress demo-progress">Progress:
+                            <div class="flc-progress-bar demo-bar">
+                                <div class="flc-progress-indicator demo-indicator"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>This example shows the Progress component "out-of-the-box," using only defaults. No options are specified.</p>
+            </div>
+
+        <div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">JavaScript</a></li>
+        <li><a href="#tabs-2">HTML</a></li>
+        <li><a href="#tabs-3">CSS</a></li>
+    </ul>
+    <div id="tabs-1">
+                <div class="code-snippet">
+                    <pre>
+var timer = support.timeSimulator(0);
+$("#showButton1").click(function () {
+    support.activateProgressBar(basicBar, timer);
+});
+
+var basicBar = fluid.progress("#progress-demo-1");</pre>
+                </div>
+    </div>
+    <div id="tabs-2">
+                <div class="html-snippet">
+                    <pre>
+&lt;div id="progress-demo-1" class="demo-container"&gt;
+    &lt;button id="showButton1"&gt;Show...&lt;/button&gt;
+    &lt;div class="flc-progress demo-progress"&gt;Progress:
+        &lt;div class="flc-progress-bar demo-bar"&gt;
+            &lt;div class="flc-progress-indicator demo-indicator"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                </div>
+    </div>
+    <div id="tabs-3">
+                <div class="css-snippet">
+                    <pre>
+.demo-container {
+    height: 70px;
+    width: 300px;
+}
+.demo-bar {
+    border: 1px solid #2D3E76;
+    width: 250px;
+}
+.demo-indicator {
+    height: 16px;
+    width: 5px;
+    border: 1px solid #2D3E76;
+    background-color: #7B7EAE;
+}</pre>
+                </div>
+    </div>
+</div>
+        </td>
+    </tr>
+</table>
+
+
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                // page layout setup
+                $(function () {
+                    $( "#tabs" ).tabs();
+                });
+                var timer = support.timeSimulator(0);
+                $("#showButton1").click(function () {
+                    support.activateProgressBar(basicBar, timer);
+                });
+
+                var basicBar = fluid.progress("#progress-demo-1");
+            });
+        </script>
+    </body>
+</html>

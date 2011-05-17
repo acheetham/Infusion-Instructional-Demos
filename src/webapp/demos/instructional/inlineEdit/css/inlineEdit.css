@@ -1,0 +1,68 @@
+body {
+    padding: 2em;
+}
+
+.header {
+    border: black solid 1px;
+    padding: 1em;
+}
+
+.options-list li {
+    list-style-type: none;
+}
+
+.options-list ul {
+    margin-top: 0em;
+}
+
+.option-name {
+    font-family: monospace;
+}
+
+.example {
+    width: 200px;
+    border: black solid 1px;
+    padding: 1em;
+    margin: 20px;
+}
+
+.code-snippet {
+    width: 500px;
+    border: grey dashed 1px;
+    padding: 1em;
+    margin: 20px;
+}
+
+.html-snippet {
+    width: 600px;
+    border: grey dashed 1px;
+    padding: 1em;
+    margin: 20px;
+}
+
+.css-snippet {
+    width: 600px;
+    border: grey dashed 1px;
+    padding: 1em;
+    margin: 20px;
+}
+
+.link {
+    font-weight: bold;
+    margin-right: 3em;
+}
+.active {
+text-decoration: underline;
+}
+
+td {
+    border: none;
+}
+
+.custom-text {
+    display: inline;
+    padding-right: 20px;
+}
+.custom-editableText {
+    border-bottom : 2px solid red;
+}

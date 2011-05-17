@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../css/fss.css" />
+        
+        <title>Sample Column Layouts</title>
+    </head>
+    <body class="layout-demos">
+
+<div class="gap"></div>
+
+<div class="fl-container-950 fl-centered">
+    <div class="fl-fix">
+        <h3>Fixed-width columns in a fixed-width container</h3>
+        <p>The container width is fixed at 700px, and the columns are divided equally.</p>
+    </div>
+    <div class="fl-col-flex3">
+        <div class="fl-col">This is the first column.<br/>
+            Aliquam erat volutpat. Aliquam consequat, quam at varius tincidunt,
+            nunc augue blandit sem, ac aliquam libero eros ac eros. Proin sed nibh
+            lacus.</div>
+        <div class="fl-col">This is the second column.<br/>Aenean urna erat,
+            accumsan vel porttitor vitae, blandit a magna. Phasellus nec nisl
+            eget purus laoreet fermentum. Mauris accumsan congue lectus a
+            fringilla.</div>
+        <div class="fl-col">This is the third column.<br/>Suspendisse vehicula
+            quam sit amet mi venenatis quis suscipit massa porttitor. Fusce
+            ligula mauris, mollis ut placerat eu, interdum eu tellus. Vivamus
+            posuere facilisis aliquet. Morbi justo nisl, auctor sed euismod quis,
+            viverra at ligula. </div>
+    </div>
+    <div class="fl-push">Footer</div>
+</div>
+
+<div class="gap"></div>
+
+<div class="fl-container-flex80 fl-centered">
+    <div class="fl-fix">
+        <h3>Fixed-width columns in a flexible-width container</h3>
+        <p>The container width is set at 80%, and the columns are equal width. Note how the column widths change if you resize the window.</p>
+    </div>
+    <div class="fl-col-flex3">
+        <div class="fl-col">This is the first column.<br/>Aliquam erat volutpat. Aliquam consequat, quam at varius tincidunt, nunc augue blandit sem, ac aliquam libero eros ac eros. Proin sed nibh lacus.</div>
+        <div class="fl-col">This is the second column.<br/>Aenean urna erat, accumsan vel porttitor vitae, blandit a magna. Phasellus nec nisl eget purus laoreet fermentum. Mauris accumsan congue lectus a fringilla.</div>
+        <div class="fl-col">This is the third column.<br/>Suspendisse vehicula quam sit amet mi venenatis quis suscipit massa porttitor. Fusce ligula mauris, mollis ut placerat eu, interdum eu tellus. Vivamus posuere facilisis aliquet. Morbi justo nisl, auctor sed euismod quis, viverra at ligula. </div>
+    </div>
+    <div class="fl-push">Footer</div>
+</div>
+
+<div class="gap"></div>
+
+<!-- the fl-fix class forces the height of the container to expand to contain its children. without it, the height would only
+     be that of the non-forced columns -->
+<div class="fl-container-flex80 fl-centered fl-fix">
+    <div class="fl-fix">
+        <h3>Mixed-width columns, two sidebars</h3>
+        <p>Two fixed-width columns, forced to left and right; one flexible-width colum in the middle.</p>
+    </div>
+    <div class="fl-col-mixed-100">
+        <div class="fl-col-fixed fl-force-left">This is the first column, forced left.<br/>Aliquam erat volutpat. Aliquam consequat, quam at varius tincidunt, nunc augue blandit sem, ac aliquam libero eros ac eros. Proin sed nibh lacus.</div>
+        <div class="fl-col-fixed fl-force-right">This is the second column, forced right.<br/>Aenean urna erat, accumsan vel porttitor vitae, blandit a magna. Phasellus nec nisl eget purus laoreet fermentum. Mauris accumsan congue lectus a fringilla.</div>
+        <div class="fl-col-flex">This is the third column, the flexible one.<br/>It is listed after the forced-alignment columns. Suspendisse vehicula quam sit amet mi venenatis quis suscipit massa porttitor. Fusce ligula mauris, mollis ut placerat eu, interdum eu tellus. Vivamus posuere facilisis aliquet. Morbi justo nisl, auctor sed euismod quis, viverra at ligula. </div>
+    </div>
+    <!-- fl-push forces the element onto a line of its own, and not next to floating things before it -->
+    <div class="fl-push">Footer</div>
+</div>
+
+<div class="gap"></div>
+
+<!-- the fl-fix class forces the height of the container to expand to contain its children. without it, the height would only
+     be that of the non-forced columns -->
+<div class="fl-container-flex80 fl-centered fl-fix">
+    <div class="fl-fix">
+        <h3>Mixed-width columns, left-side sidebar</h3>
+        <p>One fixed-width column, forced to left; one flexible-width column.</p>
+    </div>
+    <div class="fl-col-mixed-200">
+        <div class="fl-col-fixed fl-force-left">This is the first column, forced left.<br/>Aliquam erat volutpat. Aliquam consequat, quam at varius tincidunt, nunc augue blandit sem, ac aliquam libero eros ac eros. Proin sed nibh lacus.</div>
+        <div class="fl-col-flex">This is the second column, a flexible one.<br/>Aenean urna erat, accumsan vel porttitor vitae, blandit a magna. Phasellus nec nisl eget purus laoreet fermentum. Mauris accumsan congue lectus a fringilla.</div>
+    </div>
+    <!-- fl-push forces the element onto a line of its own, and not next to floating things before it -->
+    <div class="fl-push">Footer</div>
+</div>
+
+<div class="gap"></div>
+
+<div class="fl-container-flex80 fl-centered fl-fix">
+    <div class="fl-fix">
+        <h3>Mixed-width columns, right-side sidebar</h3>
+        <p>One fixed-width column, forced to right; one flexible-width column.</p>
+    </div>
+    <div class="fl-col-mixed-right-200">
+        <div class="fl-col-fixed fl-force-right">This is the first column, forced right.<br/>Aliquam erat volutpat. Aliquam consequat, quam at varius tincidunt. Phasellus nec nisl eget purus laoreet fermentum.</div>
+        <div class="fl-col-flex">This is the second column, a flexible one.<br/>Aenean urna erat, accumsan vel porttitor vitae, blandit a magna. Phasellus nec nisl eget purus laoreet fermentum. Mauris accumsan congue lectus a fringilla.</div>
+    </div>
+    <!-- fl-push forces the element onto a line of its own, and not next to floating things before it -->
+    <div class="fl-push">Footer</div>
+</div>
+
+<div class="gap"></div>
+
+<div class="fl-container-flex80 fl-centered fl-fix">
+    <div class="fl-fix">
+        <h2>Company logo</h2>
+        <div class="fl-force-right">meta content: login, search</div>
+        <p>tagline, or persistent navigation</p>
+    </div>
+    <div class="fl-col-mixed-200">
+        <div class="fl-col-fixed fl-force-left">Navigation menu
+            <ul>
+                <li>Link</li>
+                <li>Link</li>
+                <li>Link</li>
+            </ul>
+        </div>
+        <div class="fl-col-flex">General page content. Aenean urna erat, accumsan vel porttitor vitae, blandit a magna. Phasellus nec nisl eget purus laoreet fermentum. Mauris accumsan congue lectus a fringilla.</div>
+    </div>
+    <!-- fl-push forces the element onto a line of its own, and not next to floating things before it -->
+    <div class="fl-push fl-text-align-center">Footer</div>
+</div>
+
+<div class="gap"></div>
+
+<h2>Linearization</h2>
+
+<div class="fl-container-flex80 fl-centered">
+    <div class="fl-fix">
+        <h3>Fixed-width columns in a flexible-width container</h3>
+        <p>The container width is set at 80%, and the columns are equal width. Note how the column widths change if you resize the window.</p>
+    </div>
+    <div class="fl-col-flex3">
+        <div class="fl-col"><p>This is the first column.<br/>Aliquam erat volutpat. Aliquam consequat, quam at varius tincidunt.</p></div>
+        <div class="fl-col"><p>This is the second column.<br/>Aenean urna erat, accumsan vel porttitor vitae, blandit a magna. Phasellus nec nisl.</p></div>
+        <div class="fl-col"><p>This is the third column.<br/>Suspendisse vehicula quam sit amet mi venenatis quis suscipit massa porttitor.</p></div>
+    </div>
+    <div class="fl-push">Footer</div>
+</div>
+
+<div class="fl-layout-linear fl-container-flex80 fl-centered">
+    <div class="fl-fix">
+        <h3>Fixed-width columns in a flexible-width container</h3>
+        <p>The container width is set at 80%, and the columns are equal width. Note how the column widths change if you resize the window.</p>
+    </div>
+    <div class="fl-col-flex3">
+        <div class="fl-col"><p>This is the first column.<br/>Aliquam erat volutpat. Aliquam consequat, quam at varius tincidunt.</p></div>
+        <div class="fl-col"><p>This is the second column.<br/>Aenean urna erat, accumsan vel porttitor vitae, blandit a magna. Phasellus nec nisl.</p></div>
+        <div class="fl-col"><p>This is the third column.<br/>Suspendisse vehicula quam sit amet mi venenatis quis suscipit massa porttitor.</p></div>
+    </div>
+    <div class="fl-push">Footer</div>
+</div>
+
+    </body>
+</html>
