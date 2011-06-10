@@ -1,0 +1,75 @@
+td {
+    border: none;
+}
+
+.active {
+    font-weight: bold;
+}
+
+
+.html-snippet {
+    width: 400px;
+    border: grey dashed 1px;
+    padding: 1em;
+    margin: 20px;
+}
+
+.link {
+    font-weight: bold;
+    margin-right: 3em;
+}
+.active {
+text-decoration: underline;
+}
+
+
+/*
+ * Colours, to make divs easier to differentiate
+ * #917A61 = off-brown
+ */
+.layout-demos div {
+    background-color: lightgray;
+}
+.layout-demos [class*=fl-container] {
+    background-color: #917A61; // off-brown
+}
+.layout-demos .fl-col-flex {
+    background-color: #dfefff; // light blue
+}
+.layout-demos .fl-col-flex3 {
+    background-color: #9f7A6f; // reddish-brown
+}
+.layout-demos [class*=fl-col-fixed] {
+    background-color: #F2E0B6; // wheat
+}
+.layout-demos .fl-col, .layout-demos .fl-col p {
+    background-color: #faf5ff; // pale gray
+}
+
+div.gap {
+    height: 2em;
+    background-color: transparent;
+}
+
+div.fix-demo > div {
+    background-color: #ffdddd;
+}
+div.fix-demo > div.fl-fix {
+    background-color: #ddffdd;
+}
+
+.myCustomToolIcon {
+    background-image: url(../../../../framework/fss/images/themes/_common/exclamation.png);;
+}
+
+.fl-widget .fl-icon.add {
+    background-image: url(../../../../framework/fss/images/themes/_common/exclamation.png);;
+}
+.fl-widget .fl-icon.sort {
+    background-image: url(../../../../framework/fss/images/themes/_common/exclamation.png);;
+}
+
+#nested-columns-demo {
+    color: white;
+    background-color: black;
+}
