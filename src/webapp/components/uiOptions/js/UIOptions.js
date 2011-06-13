@@ -451,7 +451,7 @@ var fluid_1_4 = fluid_1_4 || {};
         });
     };
     
-    var createSliderNode = function (that, item) {
+    fluid.uiOptions.createSliderNode = function (that, item) {
         return {
             decorators: {
                 type: "fluid",
@@ -537,7 +537,7 @@ var fluid_1_4 = fluid_1_4 || {};
                 };
             } else if (item === "textSize" || item === "lineSpacing") {
                 // textfield sliders
-                tree[item] = createSliderNode(that, item);
+                tree[item] = fluid.uiOptions.createSliderNode(that, item);
             }
         }
         

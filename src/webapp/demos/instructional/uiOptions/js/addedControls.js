@@ -1,6 +1,5 @@
 /*
-Copyright 2009 University of California, Berkeley
-Copyright 2010 OCAD University
+Copyright 2011 OCAD University
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -63,7 +62,11 @@ var demo = demo || {};
                     options: {
                         model: "{uiOptions}.model",
                         applier: "{uiOptions}.applier",
-                        classnameMap: "{uiEnhancer}.options.classnameMap"
+                        classnameMap: "{uiEnhancer}.options.classnameMap",
+                        playfulness: {
+                            min: 0,
+                            max: 5
+                        }
                     }
                 },
                 settingsStore: "{uiEnhancer}.settingsStore"
@@ -71,16 +74,48 @@ var demo = demo || {};
             preInitFunction: "demo.uiOptions.addedControls.preInit"
         }
     });
+    
+    // tell the UIEnhancer the classnames to add to the new drop-down
+    fluid.demands("fluid.uiEnhancer", ["demo.uiOptionsAddControlsDemo"], {
+        options: {
+            classnameMap: {
+                location: ["default", "stairs", "downtown", "up"]
+            }
+        }
+    });
 
     // declare defaults for new controls
-    fluid.demands("fluid.uiOptions.store", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsAddControlsDemo"], {});
+    fluid.demands("fluid.uiOptions.store", ["fluid.uiEnhancer", "demo.uiOptionsAddControlsDemo"], {
+        funcName: "fluid.cookieStore",
+        options: {
+            defaultSiteSettings: {
+                // defaults for new controls:
+                playfulness: 4,
+                location: "default",
+                boots: false,
+    
+                // original defaults, unmodified:
+                textFont: "default",          // key from classname map
+                theme: "default",             // key from classname map
+                textSize: 1,                  // in points
+                lineSpacing: 1,               // in ems
+                layout: false,                // boolean
+                toc: false,                   // boolean
+                links: false,                 // boolean
+                inputsLarger: false           // boolean
+            }
+        }
+    });
 
-    demo.uiOptions.addedControls.preInit = function () {
-        fluid.uiOptions.preInit();
-        fluid.fetchResources.primeCacheFromResources("demo.uiOptions.addedControls");
-    };
+    // declare the defaults for our new controls
     fluid.defaults("demo.uiOptions.addedControls", {
-        gradeNames: ["fluid.rendererComponent", "autoInit"], 
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        strings: {
+            location: ["Default", "Under the Stairs", "Downtown", "Up"]
+        },
+        controlValues: {
+            location: ["default", "stairs", "downtown", "up"]
+        },
         selectors: {
             playfulness: ".flc-uiOptions-playfulness",
             location: ".flc-uiOptions-location",
@@ -103,6 +138,11 @@ var demo = demo || {};
         }
     });
 
+    demo.uiOptions.addedControls.preInit = function () {
+        fluid.uiOptions.preInit();
+        fluid.fetchResources.primeCacheFromResources("demo.uiOptions.addedControls");
+    };
+
     demo.uiOptions.addedControls.produceTree = function (that) {
         var tree = {};
         
@@ -124,7 +164,7 @@ var demo = demo || {};
             }
             else if (item === "playfulness") {
                 // textfield sliders
-                tree[item] = createSliderNode(that, item);
+                tree[item] = fluid.uiOptions.createSliderNode(that, item);
             }
             else if (item === "boots") {
                 // checkbox

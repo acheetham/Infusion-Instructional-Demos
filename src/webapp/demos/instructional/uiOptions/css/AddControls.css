@@ -1,0 +1,9 @@
+.fl-uiOptions .fl-uiOptions-added label {
+    display: block;
+    float: left;
+    width: 14em;    
+}
+.fl-uiOptions .fl-uiOptions-added .fl-inputs {
+    float: left;
+}
+
