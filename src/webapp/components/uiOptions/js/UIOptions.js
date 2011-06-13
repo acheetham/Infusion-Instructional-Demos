@@ -691,7 +691,7 @@ var fluid_1_4 = fluid_1_4 || {};
         });
     };
 
-    fluid.demands("fluid.uiOptions.preview", ["fluid.uiOptions", "fluid.uiOptions.textControls"], {
+    fluid.demands("fluid.uiOptions.preview", ["fluid.uiOptions"], {
         args: [
             "{uiOptions}.dom.previewFrame",
             "{options}"
