@@ -28,8 +28,10 @@ var demo = demo || {};
     fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsAddControlsDemo", {
         options: {
             templates: {
-                // provide a custom template that doesn't include the layout controls
+                // provide a custom template that includes the additional controls
                 uiOptions: "../templates/AddedControlsUIOptions.html",
+
+                //the template for the new controls
                 addedControls: "../templates/UIOptionsTemplate-added.html",
 
                 // these three are just overriding the default paths since we're in a different location
@@ -86,7 +88,7 @@ var demo = demo || {};
         }
     });
 
-    // declare defaults for new controls
+    // declare default model values for new controls
     fluid.demands("fluid.uiOptions.store", ["fluid.uiEnhancer", "demo.uiOptionsAddControlsDemo"], {
         funcName: "fluid.cookieStore",
         options: {
