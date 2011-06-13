@@ -48,7 +48,7 @@ var demo = demo || {};
         }
     });     
         
-    // add a set of controls
+    // add a set of controls as a new subcomponent to uiOptions
     fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsAddControlsDemo"], {
         options: {
             selectors: {
@@ -69,6 +69,8 @@ var demo = demo || {};
                         }
                     }
                 },
+                // this was declared in a demands block, so we have to replicate it here
+                // to ensure that it's not lost
                 settingsStore: "{uiEnhancer}.settingsStore"
             },
             preInitFunction: "demo.uiOptions.addedControls.preInit"
@@ -138,6 +140,7 @@ var demo = demo || {};
         }
     });
 
+    // augment the pre-init function so that the new template is also loaded
     demo.uiOptions.addedControls.preInit = function () {
         fluid.uiOptions.preInit();
         fluid.fetchResources.primeCacheFromResources("demo.uiOptions.addedControls");
@@ -161,12 +164,10 @@ var demo = demo || {};
                         }
                     }
                 };
-            }
-            else if (item === "playfulness") {
+            } else if (item === "playfulness") {
                 // textfield sliders
                 tree[item] = fluid.uiOptions.createSliderNode(that, item);
-            }
-            else if (item === "boots") {
+            } else if (item === "boots") {
                 // checkbox
                 tree[item] = "${selections." + item + "}";
             }
@@ -176,5 +177,5 @@ var demo = demo || {};
     };
 
     
-}) (jQuery, fluid);
+})(jQuery, fluid);
 
