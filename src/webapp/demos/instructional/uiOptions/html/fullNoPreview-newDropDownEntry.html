@@ -74,6 +74,7 @@
                 // add another theme to the 'colour-contrast' drop-down
                 fluid.demands("fluid.uiOptions.textControls", ["fluid.fullNoPreviewUIOptions", "fluid.uiOptionsNewDefaultsDemo"], {
                     options: {
+                        classnameMap: "{uiEnhancer}.options.classnameMap",
                         strings: {
                             theme: ["Default", "Black on white", "White on black", "Black on yellow", "Yellow on black", "Blue-ish"]
                         },
@@ -91,10 +92,10 @@
                         }
                     }
                 });
-
                 // add another font family to the 'text style' drop-down
                 fluid.demands("fluid.uiOptions.textControls", ["fluid.fullNoPreviewUIOptions", "fluid.uiOptionsNewDefaultsDemo"], {
                     options: {
+                        classnameMap: "{uiEnhancer}.options.classnameMap",
                         strings: {
                             textFont: ["Default", "Times New Roman", "Comic Sans", "Arial", "Verdana", "Courier New"]
                         },

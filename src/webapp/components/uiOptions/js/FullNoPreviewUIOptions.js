@@ -34,7 +34,16 @@ var fluid_1_4 = fluid_1_4 || {};
         }
     });       
     
+    // Options for UIOptions in fat panel mode
     fluid.demands("fluid.uiOptions.preview", ["fluid.uiOptions", "fluid.fullNoPreviewUIOptions"], {
         funcName: "fluid.emptySubcomponent"
     });     
+    fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions"], {
+        options: {
+            components: {
+                settingsStore: "{uiEnhancer}.settingsStore"
+            }
+        }
+    });      
+     
 })(jQuery, fluid_1_4);

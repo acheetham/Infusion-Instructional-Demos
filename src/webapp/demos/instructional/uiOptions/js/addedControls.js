@@ -65,7 +65,8 @@ var demo = demo || {};
                         applier: "{uiOptions}.applier",
                         classnameMap: "{uiEnhancer}.options.classnameMap"
                     }
-                }
+                },
+                settingsStore: "{uiEnhancer}.settingsStore"
             },
             preInitFunction: "demo.uiOptions.addedControls.preInit"
         }
