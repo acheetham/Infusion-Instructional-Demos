@@ -1,0 +1,19 @@
+.demo-previewContent {font-size:13px; background:#a390f8; padding: 0 10px;}
+.demo-previewContent h1 {margin:0; padding:5px 0 5px 0;}
+.demo-previewContent h2 {}
+.demo-previewContent h3 {}
+.demo-previewContent p {padding:5px;}
+.demo-previewContent img {float:right; margin:10px 0;}
+.demo-previewContent .float-right  {float:right; margin:10px 0;}
+.demo-previewContent strong {}
+.demo-previewContent em {}
+.demo-previewContent ul {}
+.demo-previewContent ol {}
+.demo-previewContent li {}
+.demo-previewContent table {}
+.demo-previewContent table thead {}
+.demo-previewContent table th {background-color:#000; color: #a390f8}
+.demo-previewContent table tbody {}
+.demo-previewContent table tbody td {}
+.demo-previewContent table tfoot {}
+.demo-previewContent table tfoot th {} 
