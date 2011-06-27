@@ -29,10 +29,10 @@
         <script type="text/javascript" src="../../../../lib/json/js/json2.js"></script>
 
         <script type="text/javascript" src="../../../../framework/core/js/Fluid.js"></script>
-        <script type="text/javascript" src="../../../../framework/core/js/FluidRequests.js"></script>  <!-- New in v1.3 -->
+        <script type="text/javascript" src="../../../../framework/core/js/FluidRequests.js"></script>
         <script type="text/javascript" src="../../../../framework/core/js/FluidDOMUtilities.js"></script>
         <script type="text/javascript" src="../../../../framework/core/js/DataBinding.js"></script>
-        <script type="text/javascript" src="../../../../framework/core/js/FluidIoC.js"></script>  <!-- New in v1.4 -->
+        <script type="text/javascript" src="../../../../framework/core/js/FluidIoC.js"></script>
         <script type="text/javascript" src="../../../../lib/fastXmlPull/js/fastXmlPull.js"></script>
         <script type="text/javascript" src="../../../../framework/renderer/js/fluidParser.js"></script>
         <script type="text/javascript" src="../../../../framework/renderer/js/fluidRenderer.js"></script>
@@ -48,10 +48,10 @@
             $().ready(function () {
                 fluid.setLogging(true);
                 // declare the current environment so that the template paths will override the defaults
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("fluid.uiOptionsNewDefaultsDemo");
+                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsNewDefaults");
 
                 // Specify the template URLs
-                fluid.demands("fluid.uiOptionsTemplateLoader", "fluid.uiOptionsNewDefaultsDemo", {
+                fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsNewDefaults", {
                     options: {
                         prefix: "../../../../components/uiOptions/html/",
                         templates: {
@@ -61,50 +61,33 @@
                 });
             
                 // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "fluid.uiOptionsNewDefaultsDemo"], {
+                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "demo.uiOptionsNewDefaults"], {
                     options: {
                         templateUrl: "../../../../components/tableOfContents/html/TableOfContents.html"
                     }
-                });     
-                    
-        // NOTE: don't do this in two separate demands blocks in the real world: IoC will only pick the first, since they're equal match
+                });
 
                 // add another theme to the 'colour-contrast' drop-down
-                fluid.demands("fluid.uiOptions.textControls", ["fluid.fullNoPreviewUIOptions", "fluid.uiOptionsNewDefaultsDemo"], {
+                //     and another font family to the 'text style' drop-down
+                fluid.demands("fluid.uiOptions.textControls", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsNewDefaults"], {
                     options: {
                         classnameMap: "{uiEnhancer}.options.classnameMap",
                         strings: {
-                            theme: ["Default", "Black on white", "White on black", "Black on yellow", "Yellow on black", "Blue-ish"]
-                        },
-                        controlValues: {
-                            theme: ["default", "bw", "wb", "by", "yb", "mist"]
-                        }
-                    }
-                });
-                fluid.demands("fluid.uiEnhancer", ["fluid.uiOptionsNewDefaultsDemo"], {
-                    options: {
-                        classnameMap: {
-                            "theme": {
-                                "mist": "fl-theme-mist"
-                            }
-                        }
-                    }
-                });
-                // add another font family to the 'text style' drop-down
-                fluid.demands("fluid.uiOptions.textControls", ["fluid.fullNoPreviewUIOptions", "fluid.uiOptionsNewDefaultsDemo"], {
-                    options: {
-                        classnameMap: "{uiEnhancer}.options.classnameMap",
-                        strings: {
+                            theme: ["Default", "Black on white", "White on black", "Black on yellow", "Yellow on black", "Blue-ish"],
                             textFont: ["Default", "Times New Roman", "Comic Sans", "Arial", "Verdana", "Courier New"]
                         },
                         controlValues: {
+                            theme: ["default", "bw", "wb", "by", "yb", "mist"],
                             textFont: ["default", "times", "comic", "arial", "verdana", "courier"]
                         }
                     }
                 });
-                fluid.demands("fluid.uiEnhancer", ["fluid.uiOptionsNewDefaultsDemo"], {
+                fluid.demands("fluid.uiEnhancer", ["demo.uiOptionsNewDefaults"], {
                     options: {
                         classnameMap: {
+                            "theme": {
+                                "mist": "fl-theme-mist"
+                            },
                             "textFont": {
                                 "courier": "fl-font-courier"
                             }
