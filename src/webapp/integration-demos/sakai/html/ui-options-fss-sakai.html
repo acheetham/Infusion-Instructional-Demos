@@ -56,6 +56,7 @@
         <script type="text/javascript" src="../../../components/tableOfContents/js/TableOfContents.js"></script>
         <script type="text/javascript" src="../../../components/uiOptions/js/FatPanelUIOptions.js"></script>
         <script type="text/javascript" src="../../../components/uiOptions/js/SlidingPanel.js"></script>
+        <script type="text/javascript" src="../../../components/tabs/js/Tabs.js"></script>
 
         <title>Sakai</title>
 
@@ -252,12 +253,7 @@
             fluid.staticEnvironment.FssSakaiUIOptions = fluid.typeTag("fluid.FssSakaiUIOptions");
             fluid.demands("fluid.uiOptionsTemplateLoader", "fluid.FssSakaiUIOptions", {
                 options: {
-                    templates: {
-                        uiOptions: "../../../components/uiOptions/html/FatPanelUIOptions.html",
-                        textControls: "../../../components/uiOptions/html/UIOptionsTemplate-text.html",
-                        layoutControls: "../../../components/uiOptions/html/UIOptionsTemplate-layout.html",
-                        linksControls: "../../../components/uiOptions/html/UIOptionsTemplate-links.html"
-                    }
+                    prefix: "../../../components/uiOptions/html/"
                 }
             });
         
