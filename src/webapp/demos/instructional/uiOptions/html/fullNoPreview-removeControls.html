@@ -43,6 +43,11 @@
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
         
         <script type="text/javascript">
+/*
+ * NOTE: While this technique works, it is not recommended. At this point (i.e. 1.4 release),
+ * we should NOT suggest that integrators customize the controls at all
+ * (save things like changing ranges, etc)
+ */
             $().ready(function () {
                 // declare the current environment so that the template paths will override the defaults
                 fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("fluid.uiOptionsRemoveControlsDemo");
@@ -50,11 +55,10 @@
                 // Specify the template URLs
                 fluid.demands("fluid.uiOptionsTemplateLoader", "fluid.uiOptionsRemoveControlsDemo", {
                     options: {
+                        prefix: "../../../../components/uiOptions/html/",
                         templates: {
                             // provide a custom template that doesn't include the layout controls
-                            uiOptions: "../templates/NoLayoutUIOptions.html",
-                            textControls: "../../../../components/uiOptions/html/UIOptionsTemplate-text.html",
-                            linksControls: "../../../../components/uiOptions/html/UIOptionsTemplate-links.html"
+                            uiOptions: "../templates/NoLayoutUIOptions.html"
                         }
                     }
                 });
@@ -73,9 +77,18 @@
                             layoutControls: {
                                 type: "fluid.emptySubcomponent"
                             }
-                        }
+                        },
+                        finalInitFunction: "customFinalInit"
                     }
                 });
+
+                customFinalInit = function(that) {
+                    fluid.uiOptions.finalInit(that);
+                    that.refreshControlsView = function () {
+                        that.textControls.refreshView();
+                        that.linksControls.refreshView();
+                    };
+                };
 
                 // add the pageEnhancer to the page
                 fluid.pageEnhancer();                

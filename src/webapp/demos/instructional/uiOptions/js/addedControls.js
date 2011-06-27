@@ -19,6 +19,11 @@ var demo = demo || {};
 
 (function ($, fluid) {
 
+/*
+ * NOTE: While this technique migh work, it is not recommended. At this point (i.e. 1.4 release),
+ * we should NOT suggest that integrators customize the controls at all
+ * (save things like changing ranges, etc)
+ */
     fluid.registerNamespace("demo.uiOptions.addedControls");
 
     // declare the current environment so that the template paths will override the defaults
@@ -27,17 +32,13 @@ var demo = demo || {};
     // Specify the template URLs
     fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsAddControlsDemo", {
         options: {
+            prefix: "../../../../components/uiOptions/html/",
             templates: {
                 // provide a custom template that includes the additional controls
                 uiOptions: "../templates/AddedControlsUIOptions.html",
 
                 //the template for the new controls
-                addedControls: "../templates/UIOptionsTemplate-added.html",
-
-                // these three are just overriding the default paths since we're in a different location
-                textControls: "../../../../components/uiOptions/html/UIOptionsTemplate-text.html",
-                layoutControls: "../../../../components/uiOptions/html/UIOptionsTemplate-layout.html",
-                linksControls: "../../../../components/uiOptions/html/UIOptionsTemplate-links.html"
+                addedControls: "../templates/UIOptionsTemplate-added.html"
             }
         }
     });

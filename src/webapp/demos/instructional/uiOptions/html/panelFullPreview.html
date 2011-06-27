@@ -86,11 +86,10 @@ fluid.setLogging(true);
                 fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptions.panelFullPreview");
                 fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptions.panelFullPreview", {
                     options: {
+                        prefix: "../../../../components/uiOptions/html/",
                         templates: {
-                            uiOptions: "../../../../components/uiOptions/html/FullPreviewUIOptions.html",
-                            textControls: "../../../../components/uiOptions/html/UIOptionsTemplate-text.html",
-                            layoutControls: "../../../../components/uiOptions/html/UIOptionsTemplate-layout.html",
-                            linksControls: "../../../../components/uiOptions/html/UIOptionsTemplate-links.html"
+                            // override the fat-panel default template
+                            uiOptions: "%prefixFullPreviewUIOptions.html"
                         }
                     }
                 });
@@ -102,7 +101,7 @@ fluid.setLogging(true);
                     }
                 });
 
-                // turn off live preview
+                // replace live preview with the preview component
                 fluid.demands("fluid.uiOptions", ["fluid.fatPanelUIOptions", "demo.uiOptions.panelFullPreview"], {
                     options: {
                         components: {
