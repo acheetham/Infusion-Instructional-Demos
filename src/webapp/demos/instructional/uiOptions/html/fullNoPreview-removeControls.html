@@ -50,10 +50,10 @@
  */
             $().ready(function () {
                 // declare the current environment so that the template paths will override the defaults
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("fluid.uiOptionsRemoveControlsDemo");
+                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsRemoveControlsDemo");
 
                 // Specify the template URLs
-                fluid.demands("fluid.uiOptionsTemplateLoader", "fluid.uiOptionsRemoveControlsDemo", {
+                fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsRemoveControlsDemo", {
                     options: {
                         prefix: "../../../../components/uiOptions/html/",
                         templates: {
@@ -64,14 +64,14 @@
                 });
             
                 // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "fluid.uiOptionsRemoveControlsDemo"], {
+                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "demo.uiOptionsRemoveControlsDemo"], {
                     options: {
                         templateUrl: "../../../../components/tableOfContents/html/TableOfContents.html"
                     }
                 });     
                     
                 // remove one of the default sets of controls
-                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "fluid.uiOptionsRemoveControlsDemo"], {
+                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsRemoveControlsDemo"], {
                     options: {
                         components: {
                             layoutControls: {

@@ -45,10 +45,10 @@
         <script type="text/javascript">
             $().ready(function () {
                 // declare the current environment so that the template paths will override the defaults
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("fluid.uiOptionsRangesDemo");
+                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsRangesDemo");
 
                 // Specify the template URLs
-                fluid.demands("fluid.uiOptionsTemplateLoader", "fluid.uiOptionsRangesDemo", {
+                fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsRangesDemo", {
                     options: {
                         prefix: "../../../../components/uiOptions/html/",
                         templates: {
@@ -58,14 +58,14 @@
                 });
             
                 // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "fluid.uiOptionsRangesDemo"], {
+                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "demo.uiOptionsRangesDemo"], {
                     options: {
                         templateUrl: "../../../../components/tableOfContents/html/TableOfContents.html"
                     }
                 });     
                     
                 // customize the range of text size and line spacing
-                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "fluid.uiOptionsRangesDemo"], {
+                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsRangesDemo"], {
                     options: {
                         textSize: {
                             min: 0.5,

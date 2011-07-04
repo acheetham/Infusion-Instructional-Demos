@@ -45,10 +45,10 @@
         <script type="text/javascript">
             $().ready(function () {
                 // declare the current environment so that the template paths will override the defaults
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("fluid.uiOptionsOutOfTheBoxDemo");
+                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsOutOfTheBoxDemo");
 
                 // Specify the template URLs
-                fluid.demands("fluid.uiOptionsTemplateLoader", "fluid.uiOptionsOutOfTheBoxDemo", {
+                fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsOutOfTheBoxDemo", {
                     options: {
                         prefix: "../../../../components/uiOptions/html/",
                         templates: {
@@ -58,7 +58,7 @@
                 });
             
                 // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "fluid.uiOptionsOutOfTheBoxDemo"], {
+                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "demo.uiOptionsOutOfTheBoxDemo"], {
                     options: {
                         templateUrl: "../../../../components/tableOfContents/html/TableOfContents.html"
                     }
