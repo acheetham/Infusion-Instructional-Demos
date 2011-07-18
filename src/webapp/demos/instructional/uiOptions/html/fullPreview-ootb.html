@@ -4,7 +4,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-reset-global.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-base-global.css" />
         <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-layout.css" />
         <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-text.css" />
         <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-theme-hc.css" />
@@ -17,7 +16,8 @@
         <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-yellowBlack/yellowBlack.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/UIOptions.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullUIOptions.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullNoPreviewUIOptions.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullPreviewUIOptions.css" />
+        <link rel="stylesheet" type="text/css" href="../css/fullPreview.css" />
 
         <script type="text/javascript" src="../../../../lib/jquery/core/js/jquery.js"></script>
         <script type="text/javascript" src="../../../../lib/jquery/ui/js/jquery.ui.core.js"></script>
@@ -39,46 +39,40 @@
         <script type="text/javascript" src="../../../../components/uiOptions/js/Store.js"></script>
         <script type="text/javascript" src="../../../../components/uiOptions/js/UIEnhancer.js"></script>
         <script type="text/javascript" src="../../../../components/uiOptions/js/UIOptions.js"></script>
-        <script type="text/javascript" src="../../../../components/uiOptions/js/FullNoPreviewUIOptions.js"></script>
+        <script type="text/javascript" src="../../../../components/uiOptions/js/FullPreviewUIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
         
         <script type="text/javascript">
             $().ready(function () {
                 // Declare the current environment so that the template paths will override the defaults.
                 // This environment name will be used in the demands blocks that follow
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsRangesDemo");
+                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptions.customPreview");
 
                 // Specify the template URLs
-                fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsRangesDemo", {
+                fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptions.customPreview", {
                     options: {
                         // Tell UIOptions where to find all the templates, relative to this file
                         prefix: "../../../../components/uiOptions/html/",
                         templates: {
                             // Currently, we must tell UIOptions which of the three templates to use
                             // see http://issues.fluidproject.org/browse/FLUID-4317
-                            uiOptions: "%prefixFullNoPreviewUIOptions.html"
+                            uiOptions: "%prefixFullPreviewUIOptions.html"
                         }
                     }
                 });
             
                 // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "demo.uiOptionsRangesDemo"], {
+                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "demo.uiOptions.customPreview"], {
                     options: {
                         templateUrl: "../../../../components/tableOfContents/html/TableOfContents.html"
                     }
                 });     
-                    
-                // Customize the range of text size and line spacing
-                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsRangesDemo"], {
+
+                // Supply the URL of a preview template
+                // UIOptions does *not* come with a preview template; integrators must provide one
+                fluid.demands("fluid.uiOptions.preview", ["demo.uiOptions.customPreview"], {
                     options: {
-                        textSize: {
-                            min: 0.5,
-                            max: 3
-                        },
-                        lineSpacing: {
-                            min: 0.5,
-                            max: 3
-                        }
+                        templateUrl: "../templates/CustomPreview.html"
                     }
                 });
 
@@ -87,13 +81,13 @@
                 fluid.pageEnhancer();                
 
                 // Create the UI Options interface
-                fluid.fullNoPreviewUIOptions("#ranges");
+                fluid.fullPreviewUIOptions("#customPreview");
             });
         </script>
     </head>
 
     <body>
         <h1>User Interface Options</h1>        
-        <div id="ranges"></div>      
+        <div id="customPreview"></div>      
     </body>
 </html>

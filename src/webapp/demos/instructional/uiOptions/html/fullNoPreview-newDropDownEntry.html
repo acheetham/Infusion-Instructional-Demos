@@ -47,14 +47,18 @@
         <script type="text/javascript">
             $().ready(function () {
                 fluid.setLogging(true);
-                // declare the current environment so that the template paths will override the defaults
+                // Declare the current environment so that the template paths will override the defaults
+                // This environment name will be used in the demands blocks that follow
                 fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsNewDefaults");
 
                 // Specify the template URLs
                 fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsNewDefaults", {
                     options: {
+                        // Tell UIOptions where to find all the templates, relative to this file
                         prefix: "../../../../components/uiOptions/html/",
                         templates: {
+                            // Currently, we must tell UIOptions which of the three templates to use
+                            // see http://issues.fluidproject.org/browse/FLUID-4317
                             uiOptions: "%prefixFullNoPreviewUIOptions.html"
                         }
                     }
@@ -67,38 +71,46 @@
                     }
                 });
 
-                // add another theme to the 'colour-contrast' drop-down
-                //     and another font family to the 'text style' drop-down
+                // Add another theme to the 'colour-contrast' drop-down (the "theme" arrays below)
+                //     and another font family to the 'text style' drop-down (the "textFont" arrays below)
                 fluid.demands("fluid.uiOptions.textControls", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsNewDefaults"], {
                     options: {
                         classnameMap: "{uiEnhancer}.options.classnameMap",
                         strings: {
+                            // The last entries in these arrays are the new entries.
+                            // These strings map to the corresponding arrays in the 'controlValues' below.
                             theme: ["Default", "Black on white", "White on black", "Black on yellow", "Yellow on black", "Blue-ish"],
                             textFont: ["Default", "Times New Roman", "Comic Sans", "Arial", "Verdana", "Courier New"]
                         },
                         controlValues: {
+                            // The last entries in these arrays are the new entries.
                             theme: ["default", "bw", "wb", "by", "yb", "mist"],
                             textFont: ["default", "times", "comic", "arial", "verdana", "courier"]
                         }
                     }
                 });
+
+                // Tell the pageEnhancer how to respond to the new values
                 fluid.demands("fluid.uiEnhancer", ["demo.uiOptionsNewDefaults"], {
                     options: {
                         classnameMap: {
                             "theme": {
+                                // the key in this object must match the 'controlValue' added above
                                 "mist": "fl-theme-mist"
                             },
                             "textFont": {
+                                // the key in this object must match the 'controlValue' added above
                                 "courier": "fl-font-courier"
                             }
                         }
                     }
                 });
 
-                // add the pageEnhancer to the page
+                // Add the pageEnhancer to the page. This component will respond to saved preferences
+                // carry out the transformations
                 fluid.pageEnhancer();                
 
-                // create the UI Options interface
+                // Create the UI Options interface
                 fluid.fullNoPreviewUIOptions("#new-textStyle");
             });
         </script>
