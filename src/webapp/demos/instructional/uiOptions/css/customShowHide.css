@@ -1,0 +1,8 @@
+.fl-uiOptions-fatPanel .fl-toggleButton {
+    color: white;
+    background-color: grey;
+    float: none;
+    font-weight: bold;
+    padding: 3px;
+    text-transform: none;
+}
