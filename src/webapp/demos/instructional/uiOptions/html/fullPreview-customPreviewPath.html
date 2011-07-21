@@ -68,6 +68,14 @@
                     }
                 });     
 
+                // Supply the URL of a preview template
+                // If your template is not in the default location, you must tell UI Options where it is
+                fluid.demands("fluid.uiOptions.preview", ["demo.uiOptions.customPreview"], {
+                    options: {
+                        templateUrl: "../templates/CustomPreview.html"
+                    }
+                });
+
                 // Add the pageEnhancer to the page. This component will respond to saved preferences
                 // carry out the transformations
                 fluid.pageEnhancer();                
