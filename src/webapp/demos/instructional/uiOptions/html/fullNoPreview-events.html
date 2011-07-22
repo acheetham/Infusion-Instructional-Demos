@@ -66,8 +66,14 @@
                 // specific enough since there's already another demands block with one component for a context
                 fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demos.uiOptionsEvents"], {
                     options: {
+                        components: {
+                            preview: {
+                                type: "fluid.emptySubcomponent"
+                            },
+                            settingsStore: "{uiEnhancer}.settingsStore"
+                        },
                         listeners: {
-                            onReady: function () { console.log("onReady event fired"); }
+                            onSave: function () { console.log("onSave event fired"); }
                         }
                         // why does this still work without replicating the settingsStore options
                         // from the existing demands block??

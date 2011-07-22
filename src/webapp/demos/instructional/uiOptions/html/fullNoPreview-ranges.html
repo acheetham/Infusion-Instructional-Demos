@@ -67,6 +67,12 @@
                 // Customize the range of text size and line spacing
                 fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsRangesDemo"], {
                     options: {
+                        components: {
+                            preview: {
+                                type: "fluid.emptySubcomponent"
+                            },
+                            settingsStore: "{uiEnhancer}.settingsStore"
+                        },
                         textSize: {
                             min: 0.5,
                             max: 3
