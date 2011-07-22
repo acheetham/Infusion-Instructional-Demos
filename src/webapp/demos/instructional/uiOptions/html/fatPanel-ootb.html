@@ -71,6 +71,9 @@
                     }
                 });
 
+                // Add the UI Enhancer to the page
+                fluid.pageEnhancer();
+
                 // create the UI Options interface
                 fluid.fatPanelUIOptions("#out-of-the-box", {
                     prefix: "../../../../components/uiOptions/html/"
@@ -97,9 +100,11 @@
         </div>  
         <!-- ============= End UIOptions Markup ============== -->
         
-        <div id="main">    
-            <h1>Some Sample Title</h1>
-            <p>Some content with <a id="myLink">a link</a> and <button>a button</button>. </p>
+        <!-- NOTE: It is important that this div be here -->
+        <div class="flc-toc-tocContainer toc">
         </div>
+
+        <h1>Some Sample Title</h1>
+        <p>Some content with <a id="myLink">a link</a> and <button>a button</button>. </p>
     </body>
 </html>

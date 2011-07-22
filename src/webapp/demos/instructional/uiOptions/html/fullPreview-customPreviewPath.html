@@ -46,11 +46,16 @@
         <script type="text/javascript">
             $().ready(function () {
                 // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "demo.uiOptions.customPreview"], {
+                fluid.demands("fluid.tableOfContents.levels", "fluid.tableOfContents", {
                     options: {
-                        templateUrl: "../../../../components/tableOfContents/html/TableOfContents.html"
+                        resources: {
+                            template: {
+                                forceCache: true,
+                                url: "../../../../components/tableOfContents/html/TableOfContents.html"
+                            }
+                        }
                     }
-                });     
+                });
 
 /*
                 // Declare the current environment so that the template paths will override the defaults.
@@ -100,6 +105,10 @@
     </head>
 
     <body>
+        <!-- NOTE: It is important that this div be here -->
+        <div class="flc-toc-tocContainer toc">
+        </div>
+
         <h1>User Interface Options</h1>        
         <!-- The only markup you need to provide is a single container for all things UIOptions -->
         <div id="customPreview"></div>      
