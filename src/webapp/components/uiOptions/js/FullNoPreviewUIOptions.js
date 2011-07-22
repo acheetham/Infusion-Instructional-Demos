@@ -54,6 +54,9 @@ var fluid_1_4 = fluid_1_4 || {};
     fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions"], {
         options: {
             components: {
+                preview: {
+                    type: "fluid.emptySubcomponent"
+                },
                 settingsStore: "{uiEnhancer}.settingsStore"
             }
         }
