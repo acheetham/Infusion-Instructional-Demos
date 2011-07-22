@@ -45,23 +45,6 @@
         
         <script type="text/javascript">
             $().ready(function () {
-                // Declare the current environment so that the template paths will override the defaults.
-                // This environment name will be used in the demands blocks that follow
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsOutOfTheBoxDemo");
-
-                // Specify the template URLs
-                fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsOutOfTheBoxDemo", {
-                    options: {
-                        // Tell UIOptions where to find all the templates, relative to this file
-                        prefix: "../../../../components/uiOptions/html/",
-                        templates: {
-                            // Currently, we must tell UIOptions which of the three templates to use
-                            // see http://issues.fluidproject.org/browse/FLUID-4317
-                            uiOptions: "%prefixFullNoPreviewUIOptions.html"
-                        }
-                    }
-                });
-            
                 // Supply the table of contents' template URL
                 fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "demo.uiOptionsOutOfTheBoxDemo"], {
                     options: {
@@ -74,7 +57,10 @@
                 fluid.pageEnhancer();                
 
                 // Create the UI Options interface
-                fluid.fullNoPreviewUIOptions("#out-of-the-box");
+                fluid.fullNoPreviewUIOptions("#out-of-the-box", {
+                    // Tell UIOptions where to find all the templates, relative to this file
+                    prefix: "../../../../components/uiOptions/html/"
+                });
             });
         </script>
     </head>

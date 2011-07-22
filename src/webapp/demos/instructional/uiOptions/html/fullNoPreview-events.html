@@ -45,19 +45,6 @@
         
         <script type="text/javascript">
             $().ready(function () {
-                // declare the current environment so that the template paths will override the defaults
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demos.uiOptionsEvents");
-
-                // Specify the template URLs
-                fluid.demands("fluid.uiOptionsTemplateLoader", "demos.uiOptionsEvents", {
-                    options: {
-                        prefix: "../../../../components/uiOptions/html/",
-                        templates: {
-                            uiOptions: "%prefixFullNoPreviewUIOptions.html"
-                        }
-                    }
-                });
-            
                 // Supply the table of contents' template URL
                 fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "demos.uiOptionsEvents"], {
                     options: {
@@ -65,10 +52,14 @@
                     }
                 });     
                     
+/*
+                // declare the current environment so that the template paths will override the defaults
+                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demos.uiOptionsEvents");
+
                 // add listeners to some of the events
                 // if we only specify our demo as the context, it won't work: the context wouldn't be
                 // specific enough since there's already another demands block with one component for a context
-/*                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demos.uiOptionsEvents"], {
+                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demos.uiOptionsEvents"], {
                     options: {
                         listeners: {
                             onReady: function () { console.log("onReady event fired"); }
@@ -83,11 +74,23 @@
 
                 // create the UI Options interface
                 fluid.fullNoPreviewUIOptions("#out-of-the-box", {
+                    // Tell UIOptions where to find all the templates, relative to this file
+                    prefix: "../../../../components/uiOptions/html/",
+
+                    // Specify a listener for a UI Options event
                     components: {
-                        uiOptions: {
+                        uiOptionsLoader: {
                             options: {
-                                listeners: {
-                                    onReady: function () { console.log("onReady event fired"); }
+                                components: {
+                                    uiOptions: {
+                                        options: {
+                                            listeners: {
+                                                onSave: function(){
+                                                    console.log("onSave event fired");
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

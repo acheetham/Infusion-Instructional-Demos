@@ -45,22 +45,7 @@
         
         <script type="text/javascript">
             $().ready(function () {
-                // Declare the current environment so that the template paths will override the defaults.
-                // This environment name will be used in the demands blocks that follow
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsRangesDemo");
 
-                // Specify the template URLs
-                fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsRangesDemo", {
-                    options: {
-                        // Tell UIOptions where to find all the templates, relative to this file
-                        prefix: "../../../../components/uiOptions/html/",
-                        templates: {
-                            // Currently, we must tell UIOptions which of the three templates to use
-                            // see http://issues.fluidproject.org/browse/FLUID-4317
-                            uiOptions: "%prefixFullNoPreviewUIOptions.html"
-                        }
-                    }
-                });
             
                 // Supply the table of contents' template URL
                 fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "demo.uiOptionsRangesDemo"], {
@@ -69,8 +54,13 @@
                     }
                 });     
                     
+/*
+                // Declare the current environment so that the template paths will override the defaults.
+                // This environment name will be used in the demands blocks that follow
+                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsRangesDemo");
+
                 // Customize the range of text size and line spacing
-/*                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsRangesDemo"], {
+                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsRangesDemo"], {
                     options: {
                         textSize: {
                             min: 0.5,
@@ -89,16 +79,26 @@
 
                 // Create the UI Options interface
                 fluid.fullNoPreviewUIOptions("#ranges", {
+                    // Tell UIOptions where to find all the templates, relative to this file
+                    prefix: "../../../../components/uiOptions/html/",
+
+                    // Tell the UI what the new, custom range limits are
                     components: {
-                        uiOptions: {
+                        uiOptionsLoader: {
                             options: {
-                                textSize: {
-                                    min: 0.5,
-                                    max: 3
-                                },
-                                lineSpacing: {
-                                    min: 0.5,
-                                    max: 3
+                                components: {
+                                    uiOptions: {
+                                        options: {
+                                            textSize: {
+                                                min: 0.5,
+                                                max: 3
+                                            },
+                                            lineSpacing: {
+                                                min: 0.5,
+                                                max: 3
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

@@ -47,16 +47,13 @@
         
         <script type="text/javascript">
             $(document).ready(function () {
-                // declare the current environment so that the template paths will override the defaults
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsCustomShowHide");
-
-                // Specify the template URLs
-                fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsCustomShowHide", {
+                fluid.demands("fluid.uiOptions.templatePath", "fluid.fatPanelUIOptions", {
                     options: {
-                        prefix: "../../../../components/uiOptions/html/"
+                        value: "{fatPanelUIOptions}.options.prefix"
                     }
                 });
-                fluid.demands("fluid.renderIframe", ["demo.uiOptionsCustomShowHide"], {
+                
+                fluid.demands("fluid.renderIframe", ["fluid.fatPanelUIOptions"], {
                     options: {
                         markupProps: {
                             src: "../../../../components/uiOptions/html/FatPanelUIOptionsFrame.html"
@@ -71,8 +68,12 @@
                     }
                 });     
                     
+/*
+                // declare the current environment so that the template paths will override the defaults
+                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsCustomShowHide");
+
                 // Provide custom strings for the sliding panel to use in the button
-/*                fluid.demands("fluid.slidingPanel", "demo.uiOptionsCustomShowHide", {
+                fluid.demands("fluid.slidingPanel", "demo.uiOptionsCustomShowHide", {
                     options: {
                         strings: {
                             showText: "v Open Display Prefs Panel",
@@ -86,6 +87,10 @@
 
                 // create the UI Options interface
                 fluid.fatPanelUIOptions("#out-of-the-box", {
+                    // Tell UIOptions where to find all the templates, relative to this file
+                    prefix: "../../../../components/uiOptions/html/",
+
+                    // Provide custom strings for slidingPanel button
                     components: {
                         slidingPanel: {
                             options: {

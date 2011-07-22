@@ -45,16 +45,13 @@
         
         <script type="text/javascript">
             $(document).ready(function () {
-                // declare the current environment so that the template paths will override the defaults
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsOutOfTheBoxDemo");
-
-                // Specify the template URLs
-                fluid.demands("fluid.uiOptionsTemplateLoader", "demo.uiOptionsOutOfTheBoxDemo", {
+                fluid.demands("fluid.uiOptions.templatePath", "fluid.fatPanelUIOptions", {
                     options: {
-                        prefix: "../../../../components/uiOptions/html/"
+                        value: "{fatPanelUIOptions}.options.prefix"
                     }
                 });
-                fluid.demands("fluid.renderIframe", ["demo.uiOptionsOutOfTheBoxDemo"], {
+                
+                fluid.demands("fluid.renderIframe", ["fluid.fatPanelUIOptions"], {
                     options: {
                         markupProps: {
                             src: "../../../../components/uiOptions/html/FatPanelUIOptionsFrame.html"
@@ -63,17 +60,21 @@
                 });
             
                 // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents", ["fluid.uiEnhancer", "demo.uiOptionsOutOfTheBoxDemo"], {
+                fluid.demands("fluid.tableOfContents.levels", "fluid.tableOfContents", {
                     options: {
-                        templateUrl: "../../../../components/tableOfContents/html/TableOfContents.html"
+                        resources: {
+                            template: {
+                                forceCache: true,
+                                url: "../../../../components/tableOfContents/html/TableOfContents.html"
+                            }
+                        }
                     }
-                });     
-                    
-                // add the pageEnhancer to the page
-                fluid.pageEnhancer();                
+                });
 
                 // create the UI Options interface
-                fluid.fatPanelUIOptions("#out-of-the-box");
+                fluid.fatPanelUIOptions("#out-of-the-box", {
+                    prefix: "../../../../components/uiOptions/html/"
+                });
             });
         </script>
     </head>
