@@ -70,7 +70,7 @@
                 });     
                     
                 // Customize the range of text size and line spacing
-                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsRangesDemo"], {
+/*                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsRangesDemo"], {
                     options: {
                         textSize: {
                             min: 0.5,
@@ -82,13 +82,28 @@
                         }
                     }
                 });
-
+*/
                 // Add the pageEnhancer to the page. This component will respond to saved preferences
                 // carry out the transformations
                 fluid.pageEnhancer();                
 
                 // Create the UI Options interface
-                fluid.fullNoPreviewUIOptions("#ranges");
+                fluid.fullNoPreviewUIOptions("#ranges", {
+                    components: {
+                        uiOptions: {
+                            options: {
+                                textSize: {
+                                    min: 0.5,
+                                    max: 3
+                                },
+                                lineSpacing: {
+                                    min: 0.5,
+                                    max: 3
+                                }
+                            }
+                        }
+                    }
+                });
             });
         </script>
     </head>

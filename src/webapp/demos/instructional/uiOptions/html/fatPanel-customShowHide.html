@@ -72,7 +72,7 @@
                 });     
                     
                 // Provide custom strings for the sliding panel to use in the button
-                fluid.demands("fluid.slidingPanel", "demo.uiOptionsCustomShowHide", {
+/*                fluid.demands("fluid.slidingPanel", "demo.uiOptionsCustomShowHide", {
                     options: {
                         strings: {
                             showText: "v Open Display Prefs Panel",
@@ -80,12 +80,23 @@
                         }
                     }
                 });
-
+*/
                 // add the pageEnhancer to the page
                 fluid.pageEnhancer();                
 
                 // create the UI Options interface
-                fluid.fatPanelUIOptions("#out-of-the-box");
+                fluid.fatPanelUIOptions("#out-of-the-box", {
+                    components: {
+                        slidingPanel: {
+                            options: {
+                                strings: {
+                                    showText: "v Open Display Prefs Panel",
+                                    hideText: "^ Close Display Prefs Panel"
+                                }
+                            }
+                        }
+                    }
+                });
             });
         </script>
     </head>

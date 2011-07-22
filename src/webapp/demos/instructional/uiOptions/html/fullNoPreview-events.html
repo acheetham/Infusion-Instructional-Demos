@@ -68,7 +68,7 @@
                 // add listeners to some of the events
                 // if we only specify our demo as the context, it won't work: the context wouldn't be
                 // specific enough since there's already another demands block with one component for a context
-                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demos.uiOptionsEvents"], {
+/*                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demos.uiOptionsEvents"], {
                     options: {
                         listeners: {
                             onReady: function () { console.log("onReady event fired"); }
@@ -77,12 +77,22 @@
                         // from the existing demands block??
                     }
                 });
-
+*/
                 // add the pageEnhancer to the page
                 fluid.pageEnhancer();                
 
                 // create the UI Options interface
-                fluid.fullNoPreviewUIOptions("#out-of-the-box");
+                fluid.fullNoPreviewUIOptions("#out-of-the-box", {
+                    components: {
+                        uiOptions: {
+                            options: {
+                                listeners: {
+                                    onReady: function () { console.log("onReady event fired"); }
+                                }
+                            }
+                        }
+                    }
+                });
             });
         </script>
     </head>

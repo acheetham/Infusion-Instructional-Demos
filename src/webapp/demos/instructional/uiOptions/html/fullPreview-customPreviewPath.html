@@ -71,18 +71,32 @@
 
                 // Supply the URL of a preview template
                 // If your template is not in the default location, you must tell UI Options where it is
-                fluid.demands("fluid.uiOptions.preview", ["demo.uiOptions.customPreview"], {
+/*                fluid.demands("fluid.uiOptions.preview", ["demo.uiOptions.customPreview"], {
                     options: {
                         templateUrl: "../templates/CustomPreview.html"
                     }
                 });
-
+*/
                 // Add the pageEnhancer to the page. This component will respond to saved preferences
                 // carry out the transformations
                 fluid.pageEnhancer();                
 
                 // Create the UI Options interface
-                fluid.fullPreviewUIOptions("#customPreview");
+                fluid.fullPreviewUIOptions("#customPreview", {
+                    components: {
+                        uiOptions: {
+                            options: {
+                                components: {
+                                    preview: {
+                                        options: {
+                                            templateUrl: "../templates/CustomPreview.html"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
             });
         </script>
     </head>

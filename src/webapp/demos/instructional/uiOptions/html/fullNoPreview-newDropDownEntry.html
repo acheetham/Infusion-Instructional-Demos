@@ -74,7 +74,7 @@
 
                 // Add another theme to the 'colour-contrast' drop-down (the "theme" arrays below)
                 //     and another font family to the 'text style' drop-down (the "textFont" arrays below)
-                fluid.demands("fluid.uiOptions.textControls", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsNewDefaults"], {
+/*                fluid.demands("fluid.uiOptions.textControls", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsNewDefaults"], {
                     options: {
                         classnameMap: "{uiEnhancer}.options.classnameMap",
                         strings: {
@@ -90,9 +90,9 @@
                         }
                     }
                 });
-
+*/
                 // Tell the pageEnhancer how to respond to the new values
-                fluid.demands("fluid.uiEnhancer", ["demo.uiOptionsNewDefaults"], {
+/*                fluid.demands("fluid.uiEnhancer", ["demo.uiOptionsNewDefaults"], {
                     options: {
                         classnameMap: {
                             "theme": {
@@ -106,13 +106,55 @@
                         }
                     }
                 });
-
+*/
                 // Add the pageEnhancer to the page. This component will respond to saved preferences
                 // carry out the transformations
-                fluid.pageEnhancer();                
+                fluid.pageEnhancer({
+                    components: {
+                        uiEnhancer: {
+                            options: {
+                                classnameMap: {
+                                    "theme": {
+                                        // the key in this object must match the 'controlValue' added above
+                                        "mist": "fl-theme-mist"
+                                    },
+                                    "textFont": {
+                                        // the key in this object must match the 'controlValue' added above
+                                        "courier": "fl-font-courier"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });                
 
                 // Create the UI Options interface
-                fluid.fullNoPreviewUIOptions("#new-textStyle");
+                fluid.fullNoPreviewUIOptions("#new-textStyle", {
+                    components: {
+                        uiOptions: {
+                            options: {
+                                components: {
+                                    textControls: {
+                                        options: {
+                                            classnameMap: "{uiEnhancer}.options.classnameMap",
+                                            strings: {
+                                                // The last entries in these arrays are the new entries.
+                                                // These strings map to the corresponding arrays in the 'controlValues' below.
+                                                theme: ["Default", "Black on white", "White on black", "Black on yellow", "Yellow on black", "Blue-ish"],
+                                                textFont: ["Default", "Times New Roman", "Comic Sans", "Arial", "Verdana", "Courier New"]
+                                            },
+                                            controlValues: {
+                                                // The last entries in these arrays are the new entries.
+                                                theme: ["default", "bw", "wb", "by", "yb", "mist"],
+                                                textFont: ["default", "times", "comic", "arial", "verdana", "courier"]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
             });
         </script>
     </head>
