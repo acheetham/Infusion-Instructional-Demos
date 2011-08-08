@@ -65,7 +65,22 @@ var fluid_1_4 = fluid_1_4 || {};
             tableOfContents: {
                 type: "fluid.tableOfContents",
                 container: "{uiEnhancer}.container",
-                createOnEvent: "onReady"
+                createOnEvent: "onReady",
+                options: {
+                    components: {
+                        levels: {
+                            type: "fluid.tableOfContents.levels",
+                            options: {
+                                resources: {
+                                    template: {
+                                        forceCache: true,
+                                        url: "{uiEnhancer}.options.tocTemplate"
+                                    }
+                                }
+                            } 
+                        }
+                    }
+                }
             },
             textFont: {
                 type: "fluid.uiEnhancer.classSwapper",
@@ -86,7 +101,10 @@ var fluid_1_4 = fluid_1_4 || {};
                 }
             },
             settingsStore: {
-                type: "fluid.uiOptions.store"
+                type: "fluid.uiOptions.store",
+                options: {
+                    defaultSiteSettings: "{uiEnhancer}.options.defaultSiteSettings"
+                }
             }
         },
         invokers: {
@@ -123,10 +141,10 @@ var fluid_1_4 = fluid_1_4 || {};
             },
             "theme": {
                 "default": "",
-                "bw": "fl-theme-uio-hc",
-                "wb": "fl-theme-uio-hci",
-                "by": "fl-theme-uio-blackYellow",
-                "yb": "fl-theme-uio-yellowBlack"
+                "bw": "fl-theme-uio-hc fl-theme-hc",
+                "wb": "fl-theme-uio-hci fl-theme-hci",
+                "by": "fl-theme-uio-blackYellow fl-theme-blackYellow",
+                "yb": "fl-theme-uio-yellowBlack fl-theme-yellowBlack"
             },
             "layout": "fl-layout-linear",
             "links": "fl-text-underline fl-text-bold fl-text-larger", 
