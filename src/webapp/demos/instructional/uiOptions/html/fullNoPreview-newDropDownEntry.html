@@ -12,11 +12,6 @@
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-yellowBlack-uio.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-blackYellow-uio.css" />
         <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-theme-mist.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-hc/hc.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-hci/hci.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-blackyellow/blackyellow.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-yellowBlack/yellowBlack.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-mist/mist.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/UIOptions.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullUIOptions.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullNoPreviewUIOptions.css" />
@@ -44,125 +39,61 @@
         <script type="text/javascript" src="../../../../components/uiOptions/js/UIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/uiOptions/js/FullNoPreviewUIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
-        
+    </head>
+
+    <body>
+        <!-- NOTE: It is important that this div be here -->
+        <div class="flc-toc-tocContainer"> </div>
+
         <script type="text/javascript">
+            // Add the pageEnhancer to the page. This component will respond to saved preferences
+            // carry out the transformations
+            fluid.pageEnhancer({
+                // Tell UIEnhancer where to find the table of contents' template URL
+                tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html",
+
+                classnameMap: {
+                    theme: {
+                        // the key in this object must match the 'controlValue' added above
+                        mist: "fl-theme-mist"
+                    },
+                    textFont: {
+                        // the key in this object must match the 'controlValue' added above
+                        courier: "fl-font-courier"
+                    }
+                }
+            });                
+
             $().ready(function () {
-                fluid.setLogging(true);
-                // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents.levels", "fluid.tableOfContents", {
-                    options: {
-                        resources: {
-                            template: {
-                                forceCache: true,
-                                url: "../../../../components/tableOfContents/html/TableOfContents.html"
-                            }
-                        }
-                    }
-                });
-
-/*
-                // Declare the current environment so that the template paths will override the defaults
-                // This environment name will be used in the demands blocks that follow
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsNewDefaults");
-
-                // Add another theme to the 'colour-contrast' drop-down (the "theme" arrays below)
-                //     and another font family to the 'text style' drop-down (the "textFont" arrays below)
-                fluid.demands("fluid.uiOptions.textControls", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsNewDefaults"], {
-                    options: {
-                        classnameMap: "{uiEnhancer}.options.classnameMap",
-                        strings: {
-                            // The last entries in these arrays are the new entries.
-                            // These strings map to the corresponding arrays in the 'controlValues' below.
-                            theme: ["Default", "Black on white", "White on black", "Black on yellow", "Yellow on black", "Blue-ish"],
-                            textFont: ["Default", "Times New Roman", "Comic Sans", "Arial", "Verdana", "Courier New"]
-                        },
-                        controlValues: {
-                            // The last entries in these arrays are the new entries.
-                            theme: ["default", "bw", "wb", "by", "yb", "mist"],
-                            textFont: ["default", "times", "comic", "arial", "verdana", "courier"]
-                        }
-                    }
-                });
-
-                // Tell the pageEnhancer how to respond to the new values
-                fluid.demands("fluid.uiEnhancer", ["demo.uiOptionsNewDefaults"], {
-                    options: {
-                        classnameMap: {
-                            "theme": {
-                                // the key in this object must match the 'controlValue' added above
-                                "mist": "fl-theme-mist"
-                            },
-                            "textFont": {
-                                // the key in this object must match the 'controlValue' added above
-                                "courier": "fl-font-courier"
-                            }
-                        }
-                    }
-                });
-*/
-                // Add the pageEnhancer to the page. This component will respond to saved preferences
-                // carry out the transformations
-                fluid.pageEnhancer({
-                    classnameMap: {
-                        "theme": {
-                            // the key in this object must match the 'controlValue' added above
-                            "mist": "fl-theme-mist"
-                        },
-                        "textFont": {
-                            // the key in this object must match the 'controlValue' added above
-                            "courier": "fl-font-courier"
-                        }
-                    }
-                });                
-
                 // Create the UI Options interface
-                fluid.fullNoPreviewUIOptions("#new-textStyle", {
+                fluid.uiOptions.fullNoPreview("#new-dropDowns", {
                     // Tell UIOptions where to find all the templates, relative to this file
                     prefix: "../../../../components/uiOptions/html/",
 
                     // Specify the new entries in the drop-downs
-                    components: {
-                        uiOptionsLoader: {
-                            options: {
-                                components: {
-                                    uiOptions: {
-                                        options: {
-                                            components: {
-                                                textControls: {
-                                                    options: {
-                                                        classnameMap: "{uiEnhancer}.options.classnameMap",
-                                                        strings: {
-                                                            // The last entries in these arrays are the new entries.
-                                                            // These strings map to the corresponding arrays in the 'controlValues' below.
-                                                            theme: ["Default", "Black on white", "White on black", "Black on yellow", "Yellow on black", "Blue-ish"],
-                                                            textFont: ["Default", "Times New Roman", "Comic Sans", "Arial", "Verdana", "Courier New"]
-                                                        },
-                                                        controlValues: {
-                                                            // The last entries in these arrays are the new entries.
-                                                            theme: ["default", "bw", "wb", "by", "yb", "mist"],
-                                                            textFont: ["default", "times", "comic", "arial", "verdana", "courier"]
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                    textControls: {
+                        options: {
+                            classnameMap: "{uiEnhancer}.options.classnameMap",
+                            strings: {
+                                // The last entries in these arrays are the new entries.
+                                // These strings map to the corresponding arrays in the 'controlValues' below.
+                                theme: ["Default", "Black on white", "White on black", "Black on yellow", "Yellow on black", "Blue-ish"],
+                                textFont: ["Default", "Times New Roman", "Comic Sans", "Arial", "Verdana", "Courier New"]
+                            },
+                            controlValues: {
+                                // The last entries in these arrays are the new entries.
+                                theme: ["default", "bw", "wb", "by", "yb", "mist"],
+                                textFont: ["default", "times", "comic", "arial", "verdana", "courier"]
                             }
                         }
                     }
                 });
             });
         </script>
-    </head>
-
-    <body>
-        <!-- NOTE: It is important that this div be here -->
-        <div class="flc-toc-tocContainer toc">
-        </div>
 
         <h1>User Interface Options</h1>        
+
         <!-- The only markup you need to provide is a single container for all things UIOptions -->
-        <div id="new-textStyle"></div>      
+        <div id="new-dropDowns"></div>      
     </body>
 </html>

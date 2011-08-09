@@ -11,10 +11,6 @@
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-hci-uio.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-yellowBlack-uio.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-blackYellow-uio.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-hc/hc.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-hci/hci.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-blackyellow/blackyellow.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-yellowBlack/yellowBlack.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/UIOptions.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullUIOptions.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullNoPreviewUIOptions.css" />
@@ -42,66 +38,31 @@
         <script type="text/javascript" src="../../../../components/uiOptions/js/UIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/uiOptions/js/FullNoPreviewUIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
-        
+    </head>
+
+    <body>
+        <!-- NOTE: It is important that this div be here -->
+        <div class="flc-toc-tocContainer"> </div>
+
         <script type="text/javascript">
+            // add the pageEnhancer to the page
+            fluid.pageEnhancer({
+                // Tell UIEnhancer where to find the table of contents' template URL
+                tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html"
+            });                
+
             $().ready(function () {
-                // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents.levels", "fluid.tableOfContents", {
-                    options: {
-                        resources: {
-                            template: {
-                                forceCache: true,
-                                url: "../../../../components/tableOfContents/html/TableOfContents.html"
-                            }
-                        }
-                    }
-                });
-                    
-/*
-                // declare the current environment so that the template paths will override the defaults
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demos.uiOptionsEvents");
-
-                // add listeners to some of the events
-                // if we only specify our demo as the context, it won't work: the context wouldn't be
-                // specific enough since there's already another demands block with one component for a context
-                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demos.uiOptionsEvents"], {
-                    options: {
-                        components: {
-                            preview: {
-                                type: "fluid.emptySubcomponent"
-                            },
-                            settingsStore: "{uiEnhancer}.settingsStore"
-                        },
-                        listeners: {
-                            onSave: function () { console.log("onSave event fired"); }
-                        }
-                        // why does this still work without replicating the settingsStore options
-                        // from the existing demands block??
-                    }
-                });
-*/
-                // add the pageEnhancer to the page
-                fluid.pageEnhancer();                
-
                 // create the UI Options interface
-                fluid.fullNoPreviewUIOptions("#out-of-the-box", {
+                fluid.uiOptions.fullNoPreview("#events", {
                     // Tell UIOptions where to find all the templates, relative to this file
                     prefix: "../../../../components/uiOptions/html/",
 
                     // Specify a listener for a UI Options event
-                    components: {
-                        uiOptionsLoader: {
-                            options: {
-                                components: {
-                                    uiOptions: {
-                                        options: {
-                                            listeners: {
-                                                onSave: function(){
-                                                    console.log("onSave event fired");
-                                                }
-                                            }
-                                        }
-                                    }
+                    uiOptions: {
+                        options: {
+                            listeners: {
+                                onSave: function(){
+                                    console.log("onSave event fired");
                                 }
                             }
                         }
@@ -109,15 +70,10 @@
                 });
             });
         </script>
-    </head>
 
-    <body>
-        <!-- NOTE: It is important that this div be here -->
-        <div class="flc-toc-tocContainer toc">
-        </div>
+        <h1>User Interface Options</h1>
 
-        <h1>User Interface Options</h1>        
         <!-- The only markup you need to provide is a single container for all things UIOptions -->
-        <div id="out-of-the-box"></div>      
+        <div id="events"></div>      
     </body>
 </html>

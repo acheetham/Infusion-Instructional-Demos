@@ -11,10 +11,6 @@
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-hci-uio.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-yellowBlack-uio.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-blackYellow-uio.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-hc/hc.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-hci/hci.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-blackyellow/blackyellow.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-yellowBlack/yellowBlack.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/UIOptions.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullUIOptions.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullNoPreviewUIOptions.css" />
@@ -43,88 +39,45 @@
         <script type="text/javascript" src="../../../../components/uiOptions/js/FullNoPreviewUIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
         
+    </head>
+
+    <body>
+        <!-- NOTE: It is important that this div be here -->
+        <div class="flc-toc-tocContainer"> </div>
+
         <script type="text/javascript">
+            // Add the pageEnhancer to the page. This component will respond to saved preferences
+            // carry out the transformations
+            fluid.pageEnhancer({
+                // Tell UIEnhancer where to find the table of contents' template URL
+                tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html"
+            });                
+
             $().ready(function () {
-
-            
-                // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents.levels", "fluid.tableOfContents", {
-                    options: {
-                        resources: {
-                            template: {
-                                forceCache: true,
-                                url: "../../../../components/tableOfContents/html/TableOfContents.html"
-                            }
-                        }
-                    }
-                });
-                    
-/*
-                // Declare the current environment so that the template paths will override the defaults.
-                // This environment name will be used in the demands blocks that follow
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsRangesDemo");
-
-                // Customize the range of text size and line spacing
-                fluid.demands("fluid.uiOptions", ["fluid.fullNoPreviewUIOptions", "demo.uiOptionsRangesDemo"], {
-                    options: {
-                        components: {
-                            preview: {
-                                type: "fluid.emptySubcomponent"
-                            },
-                            settingsStore: "{uiEnhancer}.settingsStore"
-                        },
-                        textSize: {
-                            min: 0.5,
-                            max: 3
-                        },
-                        lineSpacing: {
-                            min: 0.5,
-                            max: 3
-                        }
-                    }
-                });
-*/
-                // Add the pageEnhancer to the page. This component will respond to saved preferences
-                // carry out the transformations
-                fluid.pageEnhancer();                
-
                 // Create the UI Options interface
-                fluid.fullNoPreviewUIOptions("#ranges", {
+                fluid.uiOptions.fullNoPreview("#ranges", {
                     // Tell UIOptions where to find all the templates, relative to this file
                     prefix: "../../../../components/uiOptions/html/",
 
                     // Tell the UI what the new, custom range limits are
-                    components: {
-                        uiOptionsLoader: {
-                            options: {
-                                components: {
-                                    uiOptions: {
-                                        options: {
-                                            textSize: {
-                                                min: 0.5,
-                                                max: 3
-                                            },
-                                            lineSpacing: {
-                                                min: 0.5,
-                                                max: 3
-                                            }
-                                        }
-                                    }
-                                }
+                    textControls: {
+                        options: {
+                            textSize: {
+                                min: 0.5,
+                                max: 3
+                            },
+                            lineSpacing: {
+                                min: 0.5,
+                                max: 3
                             }
                         }
                     }
                 });
             });
         </script>
-    </head>
 
-    <body>
-        <!-- NOTE: It is important that this div be here -->
-        <div class="flc-toc-tocContainer toc">
-        </div>
-
-        <h1>User Interface Options</h1>        
+        <h1>User Interface Options</h1>  
+              
         <!-- The only markup you need to provide is a single container for all things UIOptions -->
         <div id="ranges"></div>      
     </body>

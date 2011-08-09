@@ -11,10 +11,6 @@
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-hci-uio.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-yellowBlack-uio.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-blackYellow-uio.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-hc/hc.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-hci/hci.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-blackyellow/blackyellow.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-yellowBlack/yellowBlack.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/UIOptions.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullUIOptions.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullPreviewUIOptions.css" />
@@ -42,41 +38,38 @@
         <script type="text/javascript" src="../../../../components/uiOptions/js/UIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/uiOptions/js/FullPreviewUIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
-        
-        <script type="text/javascript">
-            $().ready(function () {
-                // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents.levels", "fluid.tableOfContents", {
-                    options: {
-                        resources: {
-                            template: {
-                                forceCache: true,
-                                url: "../../../../components/tableOfContents/html/TableOfContents.html"
-                            }
-                        }
-                    }
-                });
-
-                // Add the pageEnhancer to the page. This component will respond to saved preferences
-                // carry out the transformations
-                fluid.pageEnhancer();                
-
-                // Create the UI Options interface
-                fluid.fullPreviewUIOptions("#customPreview", {
-                    // Tell UIOptions where to find all the templates, relative to this file
-                    prefix: "../../../../components/uiOptions/html/"
-                });
-            });
-        </script>
     </head>
 
     <body>
         <!-- NOTE: It is important that this div be here -->
-        <div class="flc-toc-tocContainer toc">
-        </div>
+        <div class="flc-toc-tocContainer"> </div>
+        
+        <script type="text/javascript">
+            // Add the pageEnhancer to the page. This component will respond to saved preferences
+            // carry out the transformations
+            fluid.pageEnhancer({
+                // Tell UIEnhancer where to find the table of contents' template URL
+                tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html"
+            });                
+
+            $().ready(function () {
+                // Create the UI Options interface
+                fluid.uiOptions.fullPreview("#out-of-the-box", {
+                    // Tell UIOptions where to find all the templates, relative to this file
+                    prefix: "../../../../components/uiOptions/html/",
+
+                    // Tell the Preview's UIEnhancer where to find the table of contents' template URL
+                    previewEnhancer: {
+                        options: {
+                            tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html"
+                        }
+                    }
+                });
+            });
+        </script>
 
         <h1>User Interface Options</h1>        
         <!-- The only markup you need to provide is a single container for all things UIOptions -->
-        <div id="customPreview"></div>      
+        <div id="out-of-the-box"></div>      
     </body>
 </html>
