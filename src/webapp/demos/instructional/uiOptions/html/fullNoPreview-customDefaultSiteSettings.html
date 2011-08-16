@@ -57,26 +57,6 @@
                     }
                 });
 
-/*
-                // declare the current environment so that the template paths will override the defaults
-                fluid.staticEnvironment.uiOptionsDemo = fluid.typeTag("demo.uiOptionsCustomDefaultValues");
-
-                fluid.demands("fluid.uiOptions.store", ["fluid.uiEnhancer", "demo.uiOptionsCustomDefaultValues"], {
-                    funcName: "fluid.cookieStore",
-                    options: {
-                        defaultSiteSettings: {
-                            textFont: "comic",
-                            theme: "yb",
-                            textSize: 1.5,
-                            lineSpacing: 1.3,
-//                            toc: false,
-                            links: true,
-                            inputsLarger: true
-                        }
-                    }
-                });
-*/
-
                 // Add the pageEnhancer to the page. This component will respond to saved preferences
                 // carry out the transformations
                 fluid.pageEnhancer({
@@ -98,7 +78,7 @@
                 });                
 
                 // Create the UI Options interface
-                fluid.fullNoPreviewUIOptions("#out-of-the-box", {
+                fluid.uiOptions.fullNoPreview("#out-of-the-box", {
                     // Tell UIOptions where to find all the templates, relative to this file
                     prefix: "../../../../components/uiOptions/html/"
                 });
