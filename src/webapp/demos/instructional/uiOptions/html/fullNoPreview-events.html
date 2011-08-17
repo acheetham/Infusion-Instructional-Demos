@@ -38,42 +38,57 @@
         <script type="text/javascript" src="../../../../components/uiOptions/js/UIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/uiOptions/js/FullNoPreviewUIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
-    </head>
-
-    <body>
-        <!-- NOTE: It is important that this div be here -->
-        <div class="flc-toc-tocContainer"> </div>
 
         <script type="text/javascript">
-            // add the pageEnhancer to the page
-            fluid.pageEnhancer({
-                // Tell UIEnhancer where to find the table of contents' template URL
-                tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html"
-            });                
+            // Initialize the "demo" namespace
+            var demo = demo || {};
 
-            $().ready(function () {
-                // create the UI Options interface
-                fluid.uiOptions.fullNoPreview("#events", {
-                    // Tell UIOptions where to find all the templates, relative to this file
-                    prefix: "../../../../components/uiOptions/html/",
-
-                    // Specify a listener for a UI Options event
-                    uiOptions: {
-                        options: {
-                            listeners: {
-                                onSave: function(){
-                                    console.log("onSave event fired");
+            // Define the functions that will be used by the demo
+            (function ($, fluid) {
+                demo.initPageEnhancer = function () {
+                    fluid.pageEnhancer({
+                        // Tell UIEnhancer where to find the table of contents' template URL
+                        tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html"
+                    });                
+                };
+                
+                demo.initUIOptions = function () {
+                    fluid.uiOptions.fullNoPreview("#events", {
+                        // Tell UIOptions where to find all the templates, relative to this file
+                        prefix: "../../../../components/uiOptions/html/",
+    
+                        // Specify a listener for a UI Options event
+                        uiOptions: {
+                            options: {
+                                listeners: {
+                                    onSave: function(){
+                                        console.log("onSave event fired");
+                                    }
                                 }
                             }
                         }
-                    }
-                });
-            });
+                    });
+                };    
+            }) (jQuery, fluid);
         </script>
+    </head>
+
+    <body>
+        <!-- Initialize the page enhancer right away -->
+        <script type="text/javascript">
+            demo.initPageEnhancer();
+        </script>
+
+        <!-- This div tell the page enhancer where to place a Table of Contents -->
+        <div class="flc-toc-tocContainer"> </div>
 
         <h1>User Interface Options</h1>
 
         <!-- The only markup you need to provide is a single container for all things UIOptions -->
         <div id="events"></div>      
+
+        <script type="text/javascript">
+            demo.initUIOptions();
+        </script>
     </body>
 </html>

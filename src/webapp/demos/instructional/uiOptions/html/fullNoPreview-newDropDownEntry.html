@@ -39,61 +39,75 @@
         <script type="text/javascript" src="../../../../components/uiOptions/js/UIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/uiOptions/js/FullNoPreviewUIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
+
+        <script type="text/javascript">
+            // Initialize the "demo" namespace
+            var demo = demo || {};
+
+            // Define the functions that will be used by the demo
+            (function ($, fluid) {
+                demo.initPageEnhancer = function () {
+                    fluid.pageEnhancer({
+                        // Tell UIEnhancer where to find the table of contents' template URL
+                        tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html",
+        
+                        classnameMap: {
+                            theme: {
+                                // the key in this object must match the 'controlValue' added above
+                                mist: "fl-theme-mist"
+                            },
+                            textFont: {
+                                // the key in this object must match the 'controlValue' added above
+                                courier: "fl-font-courier"
+                            }
+                        }
+                    });                
+                };
+                
+                demo.initUIOptions = function () {
+                    fluid.uiOptions.fullNoPreview("#new-dropDowns", {
+                        // Tell UIOptions where to find all the templates, relative to this file
+                        prefix: "../../../../components/uiOptions/html/",
+    
+                        // Specify the new entries in the drop-downs
+                        textControls: {
+                            options: {
+                                classnameMap: "{uiEnhancer}.options.classnameMap",
+                                strings: {
+                                    // The last entries in these arrays are the new entries.
+                                    // These strings map to the corresponding arrays in the 'controlValues' below.
+                                    theme: ["Default", "Black on white", "White on black", "Black on yellow", "Yellow on black", "Blue-ish"],
+                                    textFont: ["Default", "Times New Roman", "Comic Sans", "Arial", "Verdana", "Courier New"]
+                                },
+                                controlValues: {
+                                    // The last entries in these arrays are the new entries.
+                                    theme: ["default", "bw", "wb", "by", "yb", "mist"],
+                                    textFont: ["default", "times", "comic", "arial", "verdana", "courier"]
+                                }
+                            }
+                        }
+                    });
+                };    
+            }) (jQuery, fluid);
+        </script>
     </head>
 
     <body>
-        <!-- NOTE: It is important that this div be here -->
-        <div class="flc-toc-tocContainer"> </div>
-
+        <!-- Initialize the page enhancer right away -->
         <script type="text/javascript">
-            // Add the pageEnhancer to the page. This component will respond to saved preferences
-            // carry out the transformations
-            fluid.pageEnhancer({
-                // Tell UIEnhancer where to find the table of contents' template URL
-                tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html",
-
-                classnameMap: {
-                    theme: {
-                        // the key in this object must match the 'controlValue' added above
-                        mist: "fl-theme-mist"
-                    },
-                    textFont: {
-                        // the key in this object must match the 'controlValue' added above
-                        courier: "fl-font-courier"
-                    }
-                }
-            });                
-
-            $().ready(function () {
-                // Create the UI Options interface
-                fluid.uiOptions.fullNoPreview("#new-dropDowns", {
-                    // Tell UIOptions where to find all the templates, relative to this file
-                    prefix: "../../../../components/uiOptions/html/",
-
-                    // Specify the new entries in the drop-downs
-                    textControls: {
-                        options: {
-                            classnameMap: "{uiEnhancer}.options.classnameMap",
-                            strings: {
-                                // The last entries in these arrays are the new entries.
-                                // These strings map to the corresponding arrays in the 'controlValues' below.
-                                theme: ["Default", "Black on white", "White on black", "Black on yellow", "Yellow on black", "Blue-ish"],
-                                textFont: ["Default", "Times New Roman", "Comic Sans", "Arial", "Verdana", "Courier New"]
-                            },
-                            controlValues: {
-                                // The last entries in these arrays are the new entries.
-                                theme: ["default", "bw", "wb", "by", "yb", "mist"],
-                                textFont: ["default", "times", "comic", "arial", "verdana", "courier"]
-                            }
-                        }
-                    }
-                });
-            });
+            demo.initPageEnhancer();
         </script>
+
+        <!-- This div tell the page enhancer where to place a Table of Contents -->
+        <div class="flc-toc-tocContainer"> </div>
 
         <h1>User Interface Options</h1>        
 
         <!-- The only markup you need to provide is a single container for all things UIOptions -->
         <div id="new-dropDowns"></div>      
+
+        <script type="text/javascript">
+            demo.initUIOptions();
+        </script>
     </body>
 </html>

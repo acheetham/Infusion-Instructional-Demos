@@ -43,9 +43,36 @@
         <script type="text/javascript" src="../../../../components/uiOptions/js/SlidingPanel.js"></script>
         <script type="text/javascript" src="../../../../components/tabs/js/Tabs.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
+
+        <script type="text/javascript">
+            // Initialize the "demo" namespace
+            var demo = demo || {};
+
+            // Define the functions that will be used by the demo
+            (function ($, fluid) {
+                demo.initPageEnhancer = function () {
+                    fluid.pageEnhancer({
+                        // Tell UIEnhancer where to find the table of contents' template URL
+                        tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html"
+                    });
+                };
+                
+                demo.initUIOptions = function () {
+                    fluid.uiOptions.fatPanel("#out-of-the-box", {
+                        // Tell UIOptions where to find all the templates, relative to this file
+                        prefix: "../../../../components/uiOptions/html/"
+                    });
+                };    
+            }) (jQuery, fluid);
+        </script>
     </head>
 
     <body>
+        <!-- Initialize the page enhancer right away -->
+        <script type="text/javascript">
+            demo.initPageEnhancer();
+        </script>
+
         <!-- ============= Begin UIOptions Markup ============== -->
         <!-- You need to identify a single container for all things UIOptions -->
         <div id="out-of-the-box" class="fl-uiOptions-fatPanel">        
@@ -63,26 +90,14 @@
         </div>  
         <!-- ============= End UIOptions Markup ============== -->
         
-        <!-- NOTE: It is important that this div be here -->
+        <!-- This div tell the page enhancer where to place a Table of Contents -->
         <div class="flc-toc-tocContainer"> </div>
-
-        <script type="text/javascript">
-            // Add the UI Enhancer to the page
-            fluid.pageEnhancer({
-                // Tell UIEnhancer where to find the table of contents' template URL
-                tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html"
-            });
-
-            $(document).ready(function () {
-                // create the UI Options interface
-                fluid.uiOptions.fatPanel("#out-of-the-box", {
-                    // Tell UIOptions where to find all the templates, relative to this file
-                    prefix: "../../../../components/uiOptions/html/"
-                });
-            });
-        </script>
 
         <h1>Some Sample Title</h1>
         <p>Some content with <a id="myLink">a link</a> and <button>a button</button>. </p>
+
+        <script type="text/javascript">
+            demo.initUIOptions();
+        </script>
     </body>
 </html>

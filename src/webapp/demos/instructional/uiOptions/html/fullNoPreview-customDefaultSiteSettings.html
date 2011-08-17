@@ -11,10 +11,6 @@
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-hci-uio.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-yellowBlack-uio.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/fss/fss-theme-blackYellow-uio.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-hc/hc.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-hci/hci.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-blackyellow/blackyellow.css" />
-        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/fl-theme-yellowBlack/yellowBlack.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/UIOptions.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullUIOptions.css" />
         <link rel="stylesheet" type="text/css" href="../../../../components/uiOptions/css/FullNoPreviewUIOptions.css" />
@@ -44,55 +40,51 @@
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
         
         <script type="text/javascript">
-            $().ready(function () {
-                // Supply the table of contents' template URL
-                fluid.demands("fluid.tableOfContents.levels", "fluid.tableOfContents", {
-                    options: {
-                        resources: {
-                            template: {
-                                forceCache: true,
-                                url: "../../../../components/tableOfContents/html/TableOfContents.html"
-                            }
-                        }
-                    }
-                });
+            // Initialize the "demo" namespace
+            var demo = demo || {};
 
-                // Add the pageEnhancer to the page. This component will respond to saved preferences
-                // carry out the transformations
-                fluid.pageEnhancer({
-                    components: {
-                        settingsStore: {
-                            options: {
-                                defaultSiteSettings: {
-                                    textFont: "comic",
-                                    theme: "yb",
-                                    textSize: 1.5,
-                                    lineSpacing: 1.3,
-//                                    toc: false,
-                                    links: true,
-                                    inputsLarger: true
-                                }
-                            }
+            // Define the functions that will be used by the demo
+            (function ($, fluid) {
+                demo.initPageEnhancer = function () {
+                    fluid.pageEnhancer({
+                        tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html",
+                        defaultSiteSettings: {
+                            textFont: "comic",
+                            theme: "yb",
+                            textSize: 1.5,
+                            lineSpacing: 1.3,
+                            links: true,
+                            inputsLarger: true
                         }
-                    }
-                });                
-
-                // Create the UI Options interface
-                fluid.uiOptions.fullNoPreview("#out-of-the-box", {
-                    // Tell UIOptions where to find all the templates, relative to this file
-                    prefix: "../../../../components/uiOptions/html/"
-                });
-            });
+                    });                
+                };
+                
+                demo.initUIOptions = function () {
+                    fluid.uiOptions.fullNoPreview("#out-of-the-box", {
+                        // Tell UIOptions where to find all the templates, relative to this file
+                        prefix: "../../../../components/uiOptions/html/"
+                    });
+                };    
+            }) (jQuery, fluid);
         </script>
     </head>
 
     <body>
-        <!-- NOTE: It is important that this div be here -->
+        <!-- Initialize the page enhancer right away -->
+        <script type="text/javascript">
+            demo.initPageEnhancer();
+        </script>
+
+        <!-- This div tell the page enhancer where to place a Table of Contents -->
         <div class="flc-toc-tocContainer">
         </div>
 
         <h1>User Interface Options</h1>
         <!-- The only markup you need to provide is a single container for all things UIOptions -->
         <div id="out-of-the-box"></div>      
+
+        <script type="text/javascript">
+            demo.initUIOptions();
+        </script>
     </body>
 </html>
