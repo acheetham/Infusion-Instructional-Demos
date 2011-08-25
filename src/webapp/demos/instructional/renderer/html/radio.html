@@ -16,7 +16,55 @@
         <script type="text/javascript" src="../../../../framework/renderer/js/fluidRenderer.js"></script>
         <script type="text/javascript" src="../../../../framework/renderer/js/RendererUtilities.js"></script>
         <script type="text/javascript" src="../../../../framework/core/js/FluidIoC.js"></script>
-        <script type="text/javascript" src="../js/radio.js"></script>        
+
+        <script type="text/javascript">
+            var demo = demo || {};
+            
+            (function ($) {
+                
+                fluid.defaults("demo.radioRenderer", {
+                    gradeNames: ["fluid.rendererComponent", "autoInit"],
+            
+                    selectors: {
+                        radioRow: ".democ-radios-radio",
+                        radioButton: ".democ-radios-radioButton",
+                        radioLabel: ".democ-radios-radioLabel"
+                    },
+                    repeatingSelectors: ["radioRow"],
+
+                    model: {
+                        radios: {
+                            selection: [],
+                            choices: ["opt1", "opt2", "opt3", "opt4"],
+                            names: ["Option 1", "Option 2", "Option 3", "Option 4"]
+                        }
+                    },
+
+                    produceTree: "demo.radioRenderer.produceTree",
+                    
+                    renderOnInit: true
+                });
+            
+                demo.radioRenderer.produceTree = function (that) {
+                    var tree = {
+                        "expander": {
+                            "type": "fluid.renderer.selection.inputs",
+                            "rowID": "radioRow",
+                            "labelID": "radioLabel",
+                            "inputID": "radioButton",
+                            "selectID": "radio-buttons",
+                            "tree": {
+                                "selection": "${radios.selection}",
+                                "optionlist": "${radios.choices}",
+                                "optionnames": "${radios.names}"
+                            }
+                        }
+                    };
+                    return tree;
+                };
+                
+            })(jQuery);
+        </script>
     </head>
     <body>
         <h1>Radio Button Rendering Demo</h1>            
