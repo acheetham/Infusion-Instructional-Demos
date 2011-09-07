@@ -2,7 +2,7 @@ body {
     padding: 2em;
     margin: 0 auto;
     position: relative;
-    width: 980px;
+    max-width: 550px;
 }
 ul {
     margin-left: 1em;
