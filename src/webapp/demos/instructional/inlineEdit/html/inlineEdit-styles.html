@@ -3,220 +3,57 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" type="text/css" href="http://build.fluidproject.org/infusion/framework/fss/css/fss-reset.css" />
-        <link rel="stylesheet" type="text/css" href="http://build.fluidproject.org/infusion/framework/fss/css/fss-layout.css" />
-        <link rel="stylesheet" type="text/css" href="http://build.fluidproject.org/infusion/lib/jquery/plugins/tooltip/css/jquery.tooltip.css" />
-        <link rel="stylesheet" type="text/css" href="http://build.fluidproject.org/infusion/lib/jquery/ui/css/jquery.ui.theme.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-reset-global.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-base-global.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/plugins/tooltip/css/jquery.tooltip.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../lib/jquery/ui/css/jquery.ui.theme.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../components/inlineEdit/css/InlineEdit.css" />
         <link rel="stylesheet" type="text/css" href="../../css/examples.css" />
         
-        <script type="text/javascript" src="http://build.fluidproject.org/infusion/lib/jquery/core/js/jquery.js"></script>
-        <script type="text/javascript" src="http://build.fluidproject.org/infusion/lib/jquery/ui/js/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="http://build.fluidproject.org/infusion/lib/jquery/ui/js/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="http://build.fluidproject.org/infusion/lib/jquery/ui/js/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="http://build.fluidproject.org/infusion/lib/jquery/plugins/tooltip/js/jquery.ui.tooltip.js"></script>
-        <script type="text/javascript" src="http://build.fluidproject.org/infusion/framework/core/js/FluidDocument.js"></script>
-        <script type="text/javascript" src="http://build.fluidproject.org/infusion/framework/core/js/jquery.keyboard-a11y.js"></script>
-        <script type="text/javascript" src="http://build.fluidproject.org/infusion/framework/core/js/Fluid.js"></script>
-        <script type="text/javascript" src="http://build.fluidproject.org/infusion/components/tooltip/js/Tooltip.js"></script>
-        <script type="text/javascript" src="http://build.fluidproject.org/infusion/components/inlineEdit/js/InlineEdit.js"></script>
-        <script type="text/javascript" src="http://build.fluidproject.org/infusion/components/undo/js/Undo.js"></script>
+        <script type="text/javascript" src="../../../../lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="../../../../lib/jquery/ui/js/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="../../../../lib/jquery/ui/js/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="../../../../lib/jquery/ui/js/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="../../../../lib/jquery/plugins/tooltip/js/jquery.ui.tooltip.js"></script>
+        <script type="text/javascript" src="../../../../framework/core/js/FluidDocument.js"></script>
+        <script type="text/javascript" src="../../../../framework/core/js/jquery.keyboard-a11y.js"></script>
+        <script type="text/javascript" src="../../../../framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="../../../../framework/core/js/DataBinding.js"></script>
+        <script type="text/javascript" src="../../../../components/tooltip/js/Tooltip.js"></script>
+        <script type="text/javascript" src="../../../../components/inlineEdit/js/InlineEdit.js"></script>
+        <script type="text/javascript" src="../../../../components/undo/js/Undo.js"></script>
         
         <style>
-body {
-    padding: 2em;
-}
-
-.header {
-    border: black solid 1px;
-    padding: 1em;
-}
-
-.options-list li {
-    list-style-type: none;
-}
-
-.options-list ul {
-    margin-top: 0em;
-}
-
-.option-name {
-    font-family: monospace;
-}
-
-.example {
-    width: 200px;
-    border: black solid 1px;
-    padding: 1em;
-    margin: 20px;
-}
-
-.code-snippet {
-    width: 500px;
-    border: grey dashed 1px;
-    padding: 1em;
-    margin: 20px;
-}
-
-.html-snippet {
-    width: 600px;
-    border: grey dashed 1px;
-    padding: 1em;
-    margin: 20px;
-}
-
-.css-snippet {
-    width: 600px;
-    border: grey dashed 1px;
-    padding: 1em;
-    margin: 20px;
-}
-
-.link {
-    font-weight: bold;
-    margin-right: 3em;
-}
-.active {
-text-decoration: underline;
-}
-
-td {
-    border: none;
-}
-
-.custom-text {
-    display: inline;
-    padding-right: 20px;
-}
-.custom-editableText {
-    border-bottom : 2px solid red;
-}
+            .custom-editableText {
+                border-bottom : 2px solid red;
+            }
+            .custom-instructionText {
+                background: red;
+                position: absolute;
+                color: #FFFFFF;
+                padding: 3px 5px;
+                max-width: 310px;
+                z-index: 1;    
+            }
         </style>
-        <title>Customizing Inline Edit</title>
+        <title>Inline Edit: Custom Styles</title>
     </head>
     <body>
-
-        <div class="header">
-            <h1>Fluid Infusion Documentation</h1>
-            <span class="link">Home</span>
-            <span class="link active">Developer Guide</span>
-            <span class="link">Component API</span>
-            <span class="link">Framework API</span>
-            <span class="link">Technical Reference</span>
+        <div id="custom-styles">
+            <div class="flc-inlineEdit-text">
+                <div class="flc-inlineEditable">This is the editable text.</div>
+            </div>
         </div>
-        
-        Home &gt; Developer Guide &gt; How do I... &gt; Customize Inline Edit?
-        <h1>How Do I Customize Inline Edit?</h1>
 
-<table>
-    <tr>
-        <td valign="top">
-            <div class="options-list">
-                <ul>
-                    <li>Default</li>
-                    <li>General</li>
-                    <ul>
-                        <li class="option-name"><strong>styles</strong></li>
-                        <li class="option-name">selectors</li>
-                        <li class="option-name">listeners</li>
-                        <li class="option-name">strings</li>
-                    </ul>
-                    <li>Tooltip</li>
-                    <ul>
-                        <li class="option-name">useTooltip</li>
-                        <li class="option-name">tooltipText</li>
-                        <li class="option-name">tooltipId</li>
-                        <li class="option-name">tooltipDelay</li>
-                    </ul>
-                    <li>Display and Edit</li>
-                    <ul>
-                        <li class="option-name">displayModeRenderer</li>
-                        <li class="option-name">editModeRenderer</li>
-                        <li class="option-name">displayAccessor</li>
-                        <li class="option-name">displayView</li>
-                        <li class="option-name">editAccessor</li>
-                        <li class="option-name">editView</li>
-                        <li class="option-name">lazyEditView</li>
-                    </ul>
-                    <li>Advanced</li>
-                    <ul>
-                        <li class="option-name">blurHandlerBinder</li>
-                    </ul>
-                </ul>
-            </div>
-        </td>
-
-        <td valign="top">
-            <div>
-                <h2>Changing the Styles</h2>
-                <div class="example">
-                    <div id="test">
-                        <div class="flc-inlineEdit-text">
-                            <div class="flc-inlineEditable">This is the editable text.</div>
-                        </div>
-                    </div>
-                </div>
-                <p>This example overrides two styles with custom styles, changing the look of the display mode.</p>
-                <p>&nbsp;</p>
-                <p>Sed massa odio, convallis porttitor ornare ac, sodales et lorem. Aliquam felis nibh, ullamcorper nec tempor id, vulputate vel erat.
-                <ul>
-                    <li>Cras libero nibh, congue eget vulputate feugiat, suscipit at odio. Ut auctor cursus urna vitae mollis.</li>
-                    <li>Cras pretium quam congue nisl tristique pellentesque non vitae nisi.</li>
-                    <li>Etiam felis mauris, semper et faucibus vel, tempus non tellus. Mauris sollicitudin tincidunt nisl.</li>
-                </ul></p>
-            </div>
-        </td>
-
-        <td valign="top">
-            <div>
-                <h3>Mark-up:</h3>
-                <div class="html-snippet">
-                    <pre>
-&lt;div id="test"&gt;
-    &lt;div class="flc-inlineEdit-text"&gt;
-        &lt;div class="flc-inlineEditable"&gt;This is the editable text.&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</pre>
-                </div>
-
-                <h3>Code:</h3>
-                <div class="code-snippet">
-                    <pre>
-var opts = {
-    styles: {
-        text: "custom-text-style",
-        displayView: "custom-editableText fl-inlineEdit-textContainer"
-    }
-};
-var myInlineEdit = fluid.inlineEdit("#test", opts);</pre>
-                </div>
-                
-                <h3>Styles:</h3>
-                <div class="css-snippet">
-                    <pre>
-.custom-text {
-    display: inline;
-    padding-right: 20px;
-}
-.custom-editableText {
-    border-bottom : 2px solid red;
-}</pre>
-                </div>
-
-            </div>
-        </td>
-    </tr>
-</table>
-
-        
         <script type="text/javascript">
             jQuery(document).ready(function () {
-                var opts = {
+                var myInlineEdit = fluid.inlineEdit("#custom-styles", {
                     styles: {
-                        text: "custom-text-style",
-                        displayView: "custom-editableText fl-inlineEdit-textContainer"
+                        displayView: "custom-editableText fl-inlineEdit-textContainer",
+                        editModeInstruction: "custom-instructionText"
                     }
-                };
-                var myInlineEdit = fluid.inlineEdit("#test", opts);
+                });
             });
         </script>
     </body>
