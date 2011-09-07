@@ -1,0 +1,10 @@
+.demo-bar {
+    border: 1px solid #2D3E76;
+    width: 250px;
+}
+.demo-indicator {
+    height: 16px;
+    width: 5px;
+    border: 1px solid #2D3E76;
+    background-color: #7B7EAE;
+}

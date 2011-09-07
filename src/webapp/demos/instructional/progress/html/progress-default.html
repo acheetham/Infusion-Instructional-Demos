@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-reset.css" />
         <link rel="stylesheet" type="text/css" href="../../../../framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../css/progressDemos.css" />
         <link rel="stylesheet" type="text/css" href="../../css/examples.css" />
 
         <script type="text/javascript" src="../../../../lib/jquery/core/js/jquery.js"></script>
@@ -17,49 +18,32 @@
         <script type="text/javascript" src="../../../../components/progress/js/Progress.js"></script>
         
         <script type="text/javascript" src="../js/progress-support.js"></script>
-        <style>
-.demo-container {
-    height: 70px;
-    width: 300px;
-}
-.demo-bar {
-    border: 1px solid #2D3E76;
-    width: 250px;
-}
-.demo-indicator {
-    height: 16px;
-    width: 5px;
-    border: 1px solid #2D3E76;
-    background-color: #7B7EAE;
-}
-        </style>
-        <title>Progress Component: Defaults Only</title>
+        <title>Progress: Default Configuration</title>
     </head>
     <body>
 
-        <h2>Defaults Only</h2>
-        <p>This example shows the Progress component "out-of-the-box," using only defaults. No options are specified.</p>
-        <p>Click the button to start a progress indicator.</p>
-        <div class="html">
-            <div id="progress-demo-1" class="demo-container">
-                <button id="showButton1">Show...</button>
-                <div class="flc-progress demo-progress">Progress:
-                    <div class="flc-progress-bar demo-bar">
-                        <div class="flc-progress-indicator demo-indicator"></div>
-                    </div>
+        <div id="out-of-the-box">
+            <button id="showButton1">Show...</button>
+            <div class="flc-progress demo-progress">Progress:
+                <div class="flc-progress-bar demo-bar">
+                    <div class="flc-progress-indicator demo-indicator"></div>
                 </div>
             </div>
         </div>
 
         <script type="text/javascript">
-jQuery(document).ready(function () {
-    var timer = support.timeSimulator(0);
-    $("#showButton1").click(function () {
-        support.activateProgressBar(basicBar, timer);
-    });
+            jQuery(document).ready(function () {
+                // This time simulates the progress of the action
+                var timer = support.timeSimulator(0);
 
-    var basicBar = fluid.progress("#progress-demo-1");
-});
+                // This button simulates whatever conditions would trigger the progress
+                $("#showButton1").click(function () {
+                    support.activateProgressBar(basicBar, timer);
+                });
+            
+                // This creates the Progress component
+                var basicBar = fluid.progress("#out-of-the-box");
+            });
         </script>
     </body>
 </html>
