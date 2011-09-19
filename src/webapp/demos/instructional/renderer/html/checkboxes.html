@@ -18,54 +18,7 @@
         <script type="text/javascript" src="../../../../framework/renderer/js/RendererUtilities.js"></script>
         <script type="text/javascript" src="../../../../framework/core/js/FluidIoC.js"></script>
 
-        <script type="text/javascript">
-            var demo = demo || {};
-            
-            (function ($) {
-                
-                fluid.defaults("demo.checkboxRenderer", {
-                    gradeNames: ["fluid.rendererComponent", "autoInit"],
-            
-                    selectors: {
-                        checkboxRow: ".democ-checkboxes-checkbox",
-                        box: ".democ-checkboxes-box",
-                        checkboxLabel: ".democ-checkboxes-label"
-                    },
-                    repeatingSelectors: ["checkboxRow"],
-
-                    model: {
-                        checkboxes: {
-                            selection: ["opt2", "opt3"],
-                            choices: ["opt1", "opt2", "opt3", "opt4"],
-                            names: ["Option 1", "Option 2", "Option 3", "Option 4"]
-                        }
-                    },
-
-                    produceTree: "demo.checkboxRenderer.produceTree",
-
-                    renderOnInit: true
-                });
-            
-                demo.checkboxRenderer.produceTree = function (that) {
-                    var tree = {
-                        "expander": {
-                            "type": "fluid.renderer.selection.inputs",
-                            "rowID": "checkboxRow",
-                            "labelID": "checkboxLabel",
-                            "inputID": "box",
-                            "selectID": "checkboxes",
-                            "tree": {
-                                "selection": "${checkboxes.selection}",
-                                "optionlist": "${checkboxes.choices}",
-                                "optionnames": "${checkboxes.names}"
-                            }
-                        }
-                    };
-                    return tree;
-                };
-                
-            })(jQuery);
-        </script>
+        <script type="text/javascript" src="../js/checkboxes.js"></script>
     </head>
     <body>
         <div class="democ-checkboxes-buttons">
