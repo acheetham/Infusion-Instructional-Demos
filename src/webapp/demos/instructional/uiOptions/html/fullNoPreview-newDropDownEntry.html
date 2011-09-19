@@ -45,61 +45,12 @@
         <script type="text/javascript" src="../../../../components/uiOptions/js/FullNoPreviewUIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
 
-        <script type="text/javascript">
-            // Initialize the "demo" namespace
-            var demo = demo || {};
-
-            // Define the functions that will be used by the demo
-            (function ($, fluid) {
-                demo.initPageEnhancer = function () {
-                    fluid.pageEnhancer({
-                        // Tell UIEnhancer where to find the table of contents' template URL
-                        tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html",
-        
-                        classnameMap: {
-                            theme: {
-                                // the key in this object must match the 'controlValue' added above
-                                mist: "fl-theme-mist"
-                            },
-                            textFont: {
-                                // the key in this object must match the 'controlValue' added above
-                                courier: "fl-font-courier"
-                            }
-                        }
-                    });                
-                };
-                
-                demo.initUIOptions = function () {
-                    fluid.uiOptions.fullNoPreview("#new-dropDowns", {
-                        // Tell UIOptions where to find all the templates, relative to this file
-                        prefix: "../../../../components/uiOptions/html/",
-    
-                        // Specify the new entries in the drop-downs
-                        textControls: {
-                            options: {
-                                classnameMap: "{uiEnhancer}.options.classnameMap",
-                                strings: {
-                                    // The last entries in these arrays are the new entries.
-                                    // These strings map to the corresponding arrays in the 'controlValues' below.
-                                    theme: ["Default", "Black on white", "White on black", "Black on yellow", "Yellow on black", "Blue-ish"],
-                                    textFont: ["Default", "Times New Roman", "Comic Sans", "Arial", "Verdana", "Courier New"]
-                                },
-                                controlValues: {
-                                    // The last entries in these arrays are the new entries.
-                                    theme: ["default", "bw", "wb", "by", "yb", "mist"],
-                                    textFont: ["default", "times", "comic", "arial", "verdana", "courier"]
-                                }
-                            }
-                        }
-                    });
-                };    
-            }) (jQuery, fluid);
-        </script>
+        <script type="text/javascript" src="../js/fullNoPreview-newDropDownEntry.js"></script>
     </head>
 
     <body>
-        <!-- Initialize the page enhancer right away -->
         <script type="text/javascript">
+            // Initialize the page enhancer right away
             demo.initPageEnhancer();
         </script>
 

@@ -44,46 +44,12 @@
         <script type="text/javascript" src="../../../../components/uiOptions/js/FullNoPreviewUIOptions.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
 
-        <script type="text/javascript">
-            // Initialize the "demo" namespace
-            var demo = demo || {};
-
-            // Define the functions that will be used by the demo
-            (function ($, fluid) {
-                demo.initPageEnhancer = function () {
-                    fluid.pageEnhancer({
-                        // Tell UIEnhancer where to find the table of contents' template URL
-                        tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html"
-                    });                
-                };
-                
-                demo.initUIOptions = function () {
-                    fluid.uiOptions.fullNoPreview("#ranges", {
-                        // Tell UIOptions where to find all the templates, relative to this file
-                        prefix: "../../../../components/uiOptions/html/",
-    
-                        // Tell the UI what the new, custom range limits are
-                        textControls: {
-                            options: {
-                                textSize: {
-                                    min: 0.5,
-                                    max: 3
-                                },
-                                lineSpacing: {
-                                    min: 0.5,
-                                    max: 3
-                                }
-                            }
-                        }
-                    });
-                };    
-            }) (jQuery, fluid);
-        </script>
+        <script type="text/javascript" src="../js/fullNoPreview-ranges.js"></script>
     </head>
 
     <body>
-        <!-- Initialize the page enhancer right away -->
         <script type="text/javascript">
+            // Initialize the page enhancer right away
             demo.initPageEnhancer();
         </script>
 

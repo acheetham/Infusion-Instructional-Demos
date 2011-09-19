@@ -45,36 +45,13 @@
         <script type="text/javascript" src="../../../../components/tabs/js/Tabs.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
 
-        <script type="text/javascript">
-            // Initialize the "demo" namespace
-            var demo = demo || {};
-
-            // Define the functions that will be used by the demo
-            (function ($, fluid) {
-                demo.initPageEnhancer = function () {
-                    fluid.pageEnhancer({
-                        // Tell UIEnhancer where to find the table of contents' template URL
-                        tocTemplate: "../../../../components/tableOfContents/html/TableOfContents.html"
-                    });
-                };
-                
-                demo.initUIOptions = function () {
-                    fluid.uiOptions.fatPanel("#out-of-the-box", {
-                        // Tell UIOptions where to find all the templates, relative to this file
-                        prefix: "../../../../components/uiOptions/html/"
-                    });
-                };    
-            }) (jQuery, fluid);
-        </script>
+        <script type="text/javascript" src="../js/fatPanel-default.js"></script>
     </head>
 
     <body>
-        <!-- Initialize the page enhancer right away -->
         <script type="text/javascript">
-        jQuery(document).ready(function () {
+            // Initialize the page enhancer right away
             demo.initPageEnhancer();
-            demo.initUIOptions();
-        });
         </script>
 
         <!-- ============= Begin UIOptions Markup ============== -->
@@ -102,5 +79,9 @@
 
         <h1>Some Sample Title</h1>
         <p>Some content with <a id="myLink">a link</a> and <button>a button</button>. </p>
+
+        <script type="text/javascript">
+            demo.initUIOptions();
+        </script>
     </body>
 </html>

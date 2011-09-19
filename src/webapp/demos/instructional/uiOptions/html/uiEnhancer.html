@@ -35,43 +35,12 @@
         <script type="text/javascript" src="../../../../components/uiOptions/js/UIEnhancer.js"></script>
         <script type="text/javascript" src="../../../../components/tableOfContents/js/TableOfContents.js"></script>                
 
-        <script type="text/javascript">
-            // Initialize the "demo" namespace
-            var demo = demo || {};
-
-            // Define the functions that will be used by the demo
-            (function ($, fluid) {
-                demo.initEnhancer = function () {
-                    fluid.uiEnhancer("body", {
-                        // Tell UIEnhancer where to find the table of contents' template URL
-                        tocTemplate: "../templates/CustomTableOfContentsTemplate.html",
-                        components: {
-                            tableOfContents: {
-                                options: {
-                                    selectors: {
-                                        tocContainer: ".custom-tocContainer"
-                                    },
-                                    components: {
-                                        levels: {
-                                            options: {
-                                                selectors: {
-                                                    level1: ".custom-level1"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    });
-                };
-            }) (jQuery, fluid);
-        </script>
+        <script type="text/javascript" src="../js/uiEnhancer.js"></script>
     </head>
 
     <body>
-        <!-- Initialize the page enhancer right away -->
         <script type="text/javascript">
+            // Initialize the page enhancer right away
             demo.initEnhancer();
         </script>
 
