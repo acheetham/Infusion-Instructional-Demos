@@ -65,40 +65,20 @@ var fluid_1_4 = fluid_1_4 || {};
      * Works in conjunction with FSS to transform the page based on user settings. *
      *******************************************************************************/
     
-    // TODO: These are left here since toc refactoring has been carried out in another branch.
-    /**
-     * Returns true if the value is true or the string "true", false otherwise
-     * @param {Object} val
-     */
-    var isTrue = function (val) {
-        return val && (val === true || val === "true");
-    };
-
-    /**
-     * Shows the table of contents when tocSetting is "On". Hides the table of contents otherwise.
-     * @param {Object} that
-     * @param {Object} tocSetting
-     */
-    var setToc = function (that, tocSetting) {
-        if (isTrue(tocSetting)) {
-            if (that.tableOfContents) {
-                that.tableOfContents.show();
-            } else {
-                $(document).ready(that.events.onCreateTOCReady.fire);
-            }
-        } else {
-            if (that.tableOfContents) {
-                that.tableOfContents.hide();
-            }
-        }        
-    };
-    
     fluid.defaults("fluid.uiEnhancer", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         components: {
             textSize: {
                 type: "fluid.uiEnhancer.textSizer",
-                container: "{uiEnhancer}.container"
+                container: "{uiEnhancer}.container",
+                options: {
+                    invokers: {
+                        calcInitSize: {
+                            funcName: "fluid.uiEnhancer.textSizer.calcInitSize",
+                            args: ["{textSizer}", "{uiEnhancer}.options.fontSizeMap", "{uiEnhancer}.options.px2emFactor"]
+                        }
+                    }
+                }
             },
             tableOfContents: {
                 type: "fluid.tableOfContents",
@@ -117,6 +97,10 @@ var fluid_1_4 = fluid_1_4 || {};
                                 }
                             } 
                         }
+                    },
+                    listeners: {
+                      // TODO: This is as a result of lack of FLUID-4398, event relay
+                        afterRender: "{uiEnhancer}.lateRefreshRelay"
                     }
                 }
             },
@@ -129,7 +113,15 @@ var fluid_1_4 = fluid_1_4 || {};
             },
             lineSpacing: {
                 type: "fluid.uiEnhancer.lineSpacer",
-                container: "{uiEnhancer}.container"
+                container: "{uiEnhancer}.container",
+                options: {
+                    invokers: {
+                        calcInitSize: {
+                            funcName: "fluid.uiEnhancer.lineSpacer.calcInitSize",
+                            args: ["{lineSpacer}", "{uiEnhancer}.options.fontSizeMap"]
+                        }
+                    }
+                }
             },
             theme: {
                 type: "fluid.uiEnhancer.classSwapper",
@@ -168,7 +160,13 @@ var fluid_1_4 = fluid_1_4 || {};
         },
         events: {
             onCreateTOCReady: null,
+            lateRefreshView: null,
             modelChanged: null
+        },
+        listeners: {
+            // TODO: listener merging does not work in a reasonable way. Non-namespaced listeners
+            // override rather than merging as they should
+            "lateRefreshView.domReading": "fluid.uiEnhancer.applyDomReadingSettings"
         },
         classnameMap: {
             "textFont": {
@@ -189,6 +187,16 @@ var fluid_1_4 = fluid_1_4 || {};
             "links": "fl-text-underline fl-text-bold fl-text-larger", 
             "inputsLarger": "fl-text-larger"
         },
+        fontSizeMap: {
+            "xx-small": "9px",
+            "x-small":  "11px",
+            "small":    "13px",
+            "medium":   "15px",
+            "large":    "18px",
+            "x-large":  "23px",
+            "xx-large": "30px"
+        },
+        px2emFactor: "16",
         selectors: {
             colorInversion: ".fl-inverted-color"
         },
@@ -205,6 +213,9 @@ var fluid_1_4 = fluid_1_4 || {};
                 that.refreshView();   
             });
 
+        that.lateRefreshRelay = function () {
+            that.events.lateRefreshView.fire(that);
+        };
         that.updateFromSettingsStore();
         return that;
     };
@@ -217,6 +228,34 @@ var fluid_1_4 = fluid_1_4 || {};
         applier.requestChange("", newModel);
     };
 
+    fluid.uiEnhancer.applyTocSetting = function (that) {
+        var async = false;
+        if (that.model.toc) {
+            if (that.tableOfContents) {
+                that.tableOfContents.show();
+            } else {
+                that.events.onCreateTOCReady.fire();
+                async = true;
+            }
+        } else {
+            if (that.tableOfContents) {
+                that.tableOfContents.hide();
+            }
+        }
+        if (!async) {
+            that.lateRefreshRelay();
+        }
+    };
+
+    // Apply those UIEnhancer settings which require reading elements from the DOM - 
+    // as opposed to those which may be honoured by static CSS styles
+    fluid.uiEnhancer.applyDomReadingSettings = function (that) {
+        that.setLayout(that);
+        that.styleLinks(that);
+        that.styleInputs(that);
+        that.setIE6ColorInversion(that); 
+    };
+
     /**
      * Transforms the interface based on the settings in that.model
      */
@@ -225,11 +264,9 @@ var fluid_1_4 = fluid_1_4 || {};
         that.textFont.swap(that.model.textFont);
         that.lineSpacing.set(that.model.lineSpacing);
         that.theme.swap(that.model.theme);
-        that.setLayout(that);
-        setToc(that, that.model.toc);
-        that.styleLinks(that);
-        that.styleInputs(that);
-        that.setIE6ColorInversion(that);
+        $(document).ready(function () {
+            fluid.uiEnhancer.applyTocSetting(that);
+        });
     };
 
 
@@ -287,11 +324,31 @@ var fluid_1_4 = fluid_1_4 || {};
         }
     };
 
-    fluid.uiEnhancer.getTextSize = function (container) {
-        return parseFloat(container.css("font-size"));        
+    /**
+     * return "font-size" in px
+     * @param (Object) container
+     * @param (Object) fontSizeMap: the mapping between the font size string values ("small", "medium" etc) to px values
+     */
+    fluid.uiEnhancer.getTextSizeInPx = function (container, fontSizeMap) {
+        var fontSize = container.css("font-size");
+
+        if (fontSizeMap[fontSize]) {
+            fontSize = fontSizeMap[fontSize];
+        }
+
+        // fontSize is in px, convert and return font size in em
+        return parseFloat(fontSize);
     };
 
-
+    /**
+     * return "font-size" in em
+     * @param (Object) container
+     * @param (Object) fontSizeMap: the mapping between the font size string values ("small", "medium" etc) to px values
+     */
+    fluid.uiEnhancer.getTextSizeInEm = function (container, fontSizeMap, px2emFactor) {
+        // retrieve fontSize in px, convert and return in em 
+        return Math.round(fluid.uiEnhancer.getTextSizeInPx(container, fontSizeMap) / px2emFactor * 10000) / 10000;
+    };
 
     /*******************************************************************************
      * TextSizer                                                              *
@@ -306,10 +363,6 @@ var fluid_1_4 = fluid_1_4 || {};
             set: {
                 funcName: "fluid.uiEnhancer.textSizer.set",
                 args: ["@0", "{textSizer}"]
-            },
-            calcInitSize: {
-                funcName: "fluid.uiEnhancer.textSizer.calcInitSize",
-                args: ["{textSizer}"]
             }
         }
     });
@@ -318,21 +371,14 @@ var fluid_1_4 = fluid_1_4 || {};
         if (!that.initialSize) {
             that.calcInitSize();
         }
-        if (times === 1) {
-            that.container.css("font-size", ""); // empty is same effect as not being set
-        } else if (times && times > 0) {
-            var targetSize = that.initialSize * times + "px";
-            that.container.css("font-size", targetSize);
-        }
+
+        var targetSize = times && times > 0 ? times * that.initialSize : that.initialSize;
+        that.container.css("font-size", targetSize + "em");
     };
     
-    fluid.uiEnhancer.textSizer.calcInitSize = function (that) {
-        that.initialSize = fluid.uiEnhancer.getTextSize(that.container);     
+    fluid.uiEnhancer.textSizer.calcInitSize = function (that, fontSizeMap, px2emFactor) {
+        that.initialSize = fluid.uiEnhancer.getTextSizeInEm(that.container, fontSizeMap, px2emFactor);     
     };
-    
-
-
-
 
     /*******************************************************************************
      * ClassSwapper                                                                *
@@ -378,9 +424,6 @@ var fluid_1_4 = fluid_1_4 || {};
         that.clearClasses(that);
         that.container.addClass(that.options.classes[classname]);
     };
-
-
-
     
     /*******************************************************************************
      * LineSpacer                                                                  *
@@ -395,10 +438,6 @@ var fluid_1_4 = fluid_1_4 || {};
             set: {
                 funcName: "fluid.uiEnhancer.lineSpacer.set",
                 args: ["@0", "{lineSpacer}"]
-            },
-            calcInitSize: {
-                funcName: "fluid.uiEnhancer.lineSpacer.calcInitSize",
-                args: ["{lineSpacer}"]
             }
         }
     });
@@ -414,7 +453,7 @@ var fluid_1_4 = fluid_1_4 || {};
     };
     
     // Returns the value of css style "line-height" in em 
-    fluid.uiEnhancer.lineSpacer.calcInitSize = function (that) {
+    fluid.uiEnhancer.lineSpacer.calcInitSize = function (that, fontSizeMap) {
         var lineHeight = that.container.css("lineHeight");
         
         // Needs a better solution. For now, "line-height" value "normal" is defaulted to 1em.
@@ -430,11 +469,12 @@ var fluid_1_4 = fluid_1_4 || {};
             lineHeightInIE = that.container[0].currentStyle.lineHeight;
             
             if (lineHeightInIE.match(/[0-9]$/)) {
-                return lineHeightInIE;
+                that.initialSize = lineHeightInIE;
+                return;
             }
         }
         
-        that.initialSize = Math.round(parseFloat(lineHeight) / fluid.uiEnhancer.getTextSize(that.container) * 100) / 100;
+        that.initialSize = Math.round(parseFloat(lineHeight) / fluid.uiEnhancer.getTextSizeInPx(that.container, fontSizeMap) * 100) / 100;
     };
 
     /*******************************************************************************

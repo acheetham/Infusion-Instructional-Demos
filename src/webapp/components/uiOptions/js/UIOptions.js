@@ -214,26 +214,38 @@ var fluid_1_4 = fluid_1_4 || {};
                 "*.uiOptionsLoader.*.uiOptions.*.preview":            "preview",
                 "*.uiOptionsLoader.*.uiOptions.*.preview.*.enhancer": "previewEnhancer"
             }
+        },
+        derivedDefaults: {
+            uiOptions: {
+                options: {
+                    components: {
+                        settingsStore: "{uiEnhancer}.settingsStore"
+                    },
+                    listeners: {
+                        onUIOptionsRefresh: "{uiEnhancer}.updateFromSettingsStore"
+                    }
+                }
+            }
         }
     });
     
-    fluid.uiOptions.inline.makeCreator = function(componentName, processor) {
+    fluid.uiOptions.inline.makeCreator = function (componentName, processor) {
         fluid.setGlobalValue(componentName, function (container, options) {
             // make "container" one of the options so it can be munged by the uiOptions.mapOptions.
             // This container is passed down to be used as uiOptionsLoader.container
             var defaults = fluid.defaults(componentName);
-            var componentConfig = defaults.uiOptionsTransform.config;
-            var mergePolicy = defaults.mergePolicy;
             options.container = container;
             options = processor(options);
             
             var mappedOptions = fluid.uiOptions.mapOptions(options, defaults.uiOptionsTransform.config, defaults.mergePolicy, 
                 fluid.copy(defaults.derivedDefaults));
             var that = fluid.initView(componentName, container, mappedOptions);
+            // Fake out standard framework failed view diagnosis to prevent "that is null" message - remove this in 1.5
+            fluid.diagnoseFailedView(componentName, that, fluid.defaults(componentName), [componentName, container, mappedOptions]);
             fluid.initDependents(that);
             return that;
         });
-    }
+    };
     
     /**
     * @param {Object} inObject, the element on inObject is in the pair of key -> value
@@ -252,15 +264,15 @@ var fluid_1_4 = fluid_1_4 || {};
         return keys;
     };
     
-    fluid.uiOptions.mapOptionsRecord = function(options, sortedConfigKeys, config) {
+    fluid.uiOptions.mapOptionsRecord = function (options, sortedConfigKeys, config) {
         var opRecs = [{}, {}, options || {}];
-        var appliers = fluid.transform(opRecs, function(opRec) {
+        var appliers = fluid.transform(opRecs, function (opRec) {
             return fluid.makeChangeApplier(opRec);
         });
         fluid.each(sortedConfigKeys, function (origDest) {
             var source = config[origDest];
             var dest = fluid.uiOptions.expandShortPath(origDest);
-            var applier = appliers[origDest.charAt(0) === "!"? 0 : 1];
+            var applier = appliers[origDest.charAt(0) === "!" ? 0 : 1];
             
             // Process the user pass-in options
             var value = fluid.get(options, source);
@@ -270,7 +282,8 @@ var fluid_1_4 = fluid_1_4 || {};
             }
         });
         return opRecs;
-    }
+    };
+    
     // TODO: This dreadful function will be absorbed into the framework for 1.5
     /**
     * @param {Object} options, top level options to be mapped
