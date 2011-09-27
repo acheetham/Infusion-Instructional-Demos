@@ -30,7 +30,30 @@ var demo = demo || {};
     demo.initUIOptions = function () {
         fluid.uiOptions.fatPanel("#out-of-the-box", {
             // Tell UIOptions where to find all the templates, relative to this file
-            prefix: "../../../../components/uiOptions/html/"
+            prefix: "../../../../components/uiOptions/html/",
+            
+            // This demo uses a temporary store for settings, instead of the default cookie
+            // (see setupTempStorage.js).
+            // Because the FatPanel controls are presented in an iframe, its template uses a
+            // separate HTML file. To avoid having to modify the template to include
+            // setupTempStorage.js, we carry out the setup through the options here.
+            // Note that this option is not necessary to set up the Fat Panel UI Options if you
+            // are using the default cookie store.
+            uiOptions: {
+                options: {
+                    components: {
+                        uiEnhancer: {
+                            options: {
+                                components: {
+                                    settingsStore: {
+                                        type: "fluid.tempStore"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         });
     };    
 })(jQuery, fluid);

@@ -40,6 +40,29 @@ var demo = demo || {};
                         hideText: "^ Close Display Prefs Panel"
                     }
                 }
+            },
+
+            // This demo uses a temporary store for settings, instead of the default cookie
+            // (see setupTempStorage.js).
+            // Because the FatPanel controls are presented in an iframe, its template uses a
+            // separate HTML file. To avoid having to modify the template to include
+            // setupTempStorage.js, we carry out the setup through the options here.
+            // Note that this option is not necessary to set up the Fat Panel UI Options if you
+            // are using the default cookie store.
+            uiOptions: {
+                options: {
+                    components: {
+                        uiEnhancer: {
+                            options: {
+                                components: {
+                                    settingsStore: {
+                                        type: "fluid.tempStore"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         });
     };    
