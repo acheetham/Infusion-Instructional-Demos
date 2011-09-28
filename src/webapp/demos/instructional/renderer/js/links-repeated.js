@@ -35,6 +35,7 @@ var demo = demo || {};
         repeatingSelectors: ["linkRow"],
 
         model: {
+            // the data that repeats must be in an array
             repeatingData: [
                 {
                     href: "http://domain.com/page.html",
