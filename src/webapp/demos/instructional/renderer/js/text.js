@@ -13,35 +13,35 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 /*global demo:true, fluid, jQuery*/
 
 // JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true */
+/*jslint regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 // Declare the demo namespace
 var demo = demo || {};
 
 (function ($) {
     
-    // Define a component that will render the checkboxes
-    fluid.defaults("demo.tableRenderer", {
+    // Define a component that will render the text
+    fluid.defaults("demo.textRenderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
 
+        // one selector for each element that rendered data from the model
         selectors: {
             content: ".democ-div"
         },
-        repeatingSelectors: ["row"],
 
         model: {
             text: "This is a string that will be rendered."
         },
 
-        produceTree: "demo.tableRenderer.produceTree",
-
-        debugMode: true,
+        produceTree: "demo.textRenderer.produceTree",
 
         renderOnInit: true
     });
 
-    // Define the function that will be used by the component to define the renderer component tree
-    demo.tableRenderer.produceTree = function (that) {
+    // Define the function that will be used by the component to
+    // produce the renderer component tree
+    demo.textRenderer.produceTree = function (that) {
         var tree = {
             content: "${text}"
         };

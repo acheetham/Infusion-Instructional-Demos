@@ -13,30 +13,27 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 /*global demo:true, fluid, jQuery*/
 
 // JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true */
+/*jslint regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 // Declare the demo namespace
 var demo = demo || {};
 
 (function ($) {
     
-    // Define a component that will render the checkboxes
+    // Define a component that will render the link
     fluid.defaults("demo.linksRenderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
 
+        // one selector for each element that rendered data from the model
         selectors: {
-            link1: ".democ-link-1",
-            link2: ".democ-link-2"
+            link1: ".democ-link-1"
         },
 
         model: {
             link1: {
                 href: "http://domain.com/page.html",
                 label: "A link"
-            },
-            link2: {
-                href: "../relative/url.html",
-                label: "Another link"
             }
         },
 
@@ -45,16 +42,13 @@ var demo = demo || {};
         renderOnInit: true
     });
 
-    // Define the function that will be used by the component to define the renderer component tree
+    // Define the function that will be used by the component
+    // to produce the renderer component tree
     demo.linksRenderer.produceTree = function (that) {
         var tree = {
             link1: {
                 target: "${link1.href}",
                 linktext: "${link1.label}"
-            },
-            link2: {
-                target: "${link2.href}",
-                linktext: "${link2.label}"
             }
         };
         return tree;

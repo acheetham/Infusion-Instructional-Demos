@@ -13,17 +13,19 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 /*global demo:true, fluid, jQuery*/
 
 // JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true */
+/*jslint regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 // Declare the demo namespace
 var demo = demo || {};
 
 (function ($) {
     
-    // Define a component that will render the checkboxes
+    // Define a component that will render the table
     fluid.defaults("demo.tableRenderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
 
+        // one selector for each element that rendered data from the model
         selectors: {
             tableRow: ".democ-table-row",
             cell1: ".democ-table-cell-1",
@@ -31,10 +33,13 @@ var demo = demo || {};
             cell3box: ".democ-box",
             cell3label: ".democ-label"
         },
-        repeatingSelectors: ["tableRow", "cell3checkboxes"],
+
+        // the 'tableRow' selector is the one that will be repeated by the renderer
+        repeatingSelectors: ["tableRow"],
 
         model: {
-            rawData: [
+            // the data that repeats must be in an array
+            repeatingData: [
                 {
                     cell1: "Row 1 string",
                     cell2: {
@@ -62,25 +67,29 @@ var demo = demo || {};
 
         produceTree: "demo.tableRenderer.produceTree",
         
-        debugMode: true,
-        
         renderOnInit: true
     });
 
-    // Define the function that will be used by the component to define the renderer component tree
+    // Define the function that will be used by the component to
+    // produce the renderer component tree
     demo.tableRenderer.produceTree = function (that) {
         var tree = {
             expander: {
                 type: "fluid.renderer.repeat",
                 repeatID: "tableRow",
-                controlledBy: "rawData",
+                controlledBy: "repeatingData",
                 pathAs: "data",
                 tree: {
+                    // subtree for the simple text
                     cell1: "${{data}.cell1}",
+
+                    // subtree for the link
                     cell2link: {
                         target: "${{data}.cell2.href}",
                         linktext: "${{data}.cell2.label}"
                     },
+
+                    // subtree for the checkbox and its label
                     cell3label: "${{data}.cell3.label}",
                     cell3box: "${{data}.cell3.checked}"
                 }

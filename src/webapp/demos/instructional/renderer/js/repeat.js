@@ -13,25 +13,30 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 /*global demo:true, fluid, jQuery*/
 
 // JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true */
+/*jslint regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 // Declare the demo namespace
 var demo = demo || {};
 
 (function ($) {
     
-    // Define a component that will render the checkboxes
-    fluid.defaults("demo.tableRenderer", {
+    // Define a component that will render the repeating elements
+    fluid.defaults("demo.repeatRenderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
 
+        // one selector for each element that rendered data from the model
         selectors: {
             row: ".democ-repeating-div",
             content: ".democ-div-content"
         },
+
+        // the 'row' selector is the one that will be repeated by the renderer
         repeatingSelectors: ["row"],
 
         model: {
-            rawData: [
+            // the data that repeats must be in an array
+            repeatingData: [
                 {text: "This is the first string"},
                 {text: "This is the second string"},
                 {text: "This is the third string"},
@@ -39,22 +44,22 @@ var demo = demo || {};
             ]
         },
 
-        produceTree: "demo.tableRenderer.produceTree",
-
-        debugMode: true,
+        produceTree: "demo.repeatRenderer.produceTree",
 
         renderOnInit: true
     });
 
-    // Define the function that will be used by the component to define the renderer component tree
-    demo.tableRenderer.produceTree = function (that) {
+    // Define the function that will be used by the component to
+    // produce the renderer component tree
+    demo.repeatRenderer.produceTree = function (that) {
         var tree = {
             expander: {
                 type: "fluid.renderer.repeat",
                 repeatID: "row",
-                controlledBy: "rawData",
+                controlledBy: "repeatingData",
                 pathAs: "data",
                 tree: {
+                    // subtree for a text element
                     content: "${{data}.text}"
                 }
             }

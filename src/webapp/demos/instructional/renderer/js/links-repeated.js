@@ -13,27 +13,29 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 /*global demo:true, fluid, jQuery*/
 
 // JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true */
+/*jslint regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 // Declare the demo namespace
 var demo = demo || {};
 
 (function ($) {
-    
-    fluid.setLogging(true);
 
-    // Define a component that will render the checkboxes
+    // Define a component that will render the repeating links
     fluid.defaults("demo.linksRenderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
 
+        // one selector for each element that rendered data from the model
         selectors: {
             linkRow: ".democ-link-row",
             link: ".democ-link"
         },
+
+        // the 'linkRow' selector is the one that will be repeated by the renderer
         repeatingSelectors: ["linkRow"],
 
         model: {
-            rawData: [
+            repeatingData: [
                 {
                     href: "http://domain.com/page.html",
                     label: "Link 1 Label"
@@ -51,20 +53,20 @@ var demo = demo || {};
 
         produceTree: "demo.linksRenderer.produceTree",
 
-        debugMode: true,
-
         renderOnInit: true
     });
 
-    // Define the function that will be used by the component to define the renderer component tree
+    // Define the function that will be used by the component to
+    // produce the renderer component tree
     demo.linksRenderer.produceTree = function (that) {
         return {
             expander: {
                 type: "fluid.renderer.repeat",
                 repeatID: "linkRow",
-                controlledBy: "rawData",
+                controlledBy: "repeatingData",
                 pathAs: "data",
                 tree: {
+                    // subtree for a link
                     link: {
                         target: "${{data}.href}",
                         linktext: "${{data}.label}"

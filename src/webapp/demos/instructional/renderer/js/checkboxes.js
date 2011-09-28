@@ -13,7 +13,8 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 /*global demo:true, fluid, jQuery*/
 
 // JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true */
+/*jslint regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 // Declare the demo namespace
 var demo = demo || {};
@@ -24,11 +25,14 @@ var demo = demo || {};
     fluid.defaults("demo.checkboxRenderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
 
+        // one selector for each element that rendered data from the model
         selectors: {
             checkboxRow: ".democ-checkboxes-checkbox",
             box: ".democ-checkboxes-box",
             checkboxLabel: ".democ-checkboxes-label"
         },
+
+        // the 'checkboxRow' selector is the one that will be repeated by the renderer
         repeatingSelectors: ["checkboxRow"],
 
         model: {
@@ -44,19 +48,20 @@ var demo = demo || {};
         renderOnInit: true
     });
 
-    // Define the function that will be used by the component to define the renderer component tree
+    // Define the function that will be used by the component to
+    // produce the renderer component tree
     demo.checkboxRenderer.produceTree = function (that) {
         var tree = {
-            "expander": {
-                "type": "fluid.renderer.selection.inputs",
-                "rowID": "checkboxRow",
-                "labelID": "checkboxLabel",
-                "inputID": "box",
-                "selectID": "checkboxes",
-                "tree": {
-                    "selection": "${checkboxes.selection}",
-                    "optionlist": "${checkboxes.choices}",
-                    "optionnames": "${checkboxes.names}"
+            expander: {
+                type: "fluid.renderer.selection.inputs",
+                rowID: "checkboxRow",
+                labelID: "checkboxLabel",
+                inputID: "box",
+                selectID: "checkboxes",
+                tree: {
+                    selection: "${checkboxes.selection}",
+                    optionlist: "${checkboxes.choices}",
+                    optionnames: "${checkboxes.names}"
                 }
             }
         };

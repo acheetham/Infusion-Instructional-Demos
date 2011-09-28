@@ -13,17 +13,19 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 /*global demo:true, fluid, jQuery*/
 
 // JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true */
+/*jslint regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 // Declare the demo namespace
 var demo = demo || {};
 
 (function ($) {
     
-    // Define a component that will render the checkboxes
+    // Define a component that will render the checkbox
     fluid.defaults("demo.checkboxRenderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
 
+        // one selector for each element that rendered data from the model
         selectors: {
             checkbox: ".democ-box",
             checkboxLabel: ".democ-label"
@@ -36,14 +38,14 @@ var demo = demo || {};
 
         produceTree: "demo.checkboxRenderer.produceTree",
 
-        debugMode: true,
-        
         renderOnInit: true
     });
 
-    // Define the function that will be used by the component to define the renderer component tree
+    // Define the function that will be used by the component to
+    // produce the renderer component tree
     demo.checkboxRenderer.produceTree = function (that) {
         var tree = {
+            // simple value bindings for the input and the label
             checkbox: "${value}",
             checkboxLabel: "${label}"
         };

@@ -13,7 +13,8 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 /*global demo:true, fluid, jQuery*/
 
 // JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true */
+/*jslint regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 // Declare the demo namespace
 var demo = demo || {};
@@ -24,6 +25,7 @@ var demo = demo || {};
     fluid.defaults("demo.radioRenderer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
 
+        // one selector for each element that rendered data from the model
         selectors: {
             radioRow: ".democ-radios-radio",
             radioButton: ".democ-radios-radioButton",
@@ -44,19 +46,20 @@ var demo = demo || {};
         renderOnInit: true
     });
 
-    // Define the function that will be used by the component to define the renderer component tree
+    // Define the function that will be used by the component to
+    // produce the renderer component tree
     demo.radioRenderer.produceTree = function (that) {
         var tree = {
-            "expander": {
-                "type": "fluid.renderer.selection.inputs",
-                "rowID": "radioRow",
-                "labelID": "radioLabel",
-                "inputID": "radioButton",
-                "selectID": "radio-buttons",
-                "tree": {
-                    "selection": "${radios.selection}",
-                    "optionlist": "${radios.choices}",
-                    "optionnames": "${radios.names}"
+            expander: {
+                type: "fluid.renderer.selection.inputs",
+                rowID: "radioRow",
+                labelID: "radioLabel",
+                inputID: "radioButton",
+                selectID: "radio-buttons",
+                tree: {
+                    selection: "${radios.selection}",
+                    optionlist: "${radios.choices}",
+                    optionnames: "${radios.names}"
                 }
             }
         };
