@@ -2,6 +2,7 @@
 Copyright 2008-2009 University of Toronto
 Copyright 2008-2009 University of California, Berkeley
 Copyright 2010-2011 OCAD University
+Copyright 2011 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -24,7 +25,7 @@ var fluid_1_4 = fluid_1_4 || {};
  ************/
 
 (function ($, fluid) {
-    
+
     var fileOrFiles = function (that, numFiles) {
         return (numFiles === 1) ? that.options.strings.progress.singleFile : 
             that.options.strings.progress.pluralFiles;
