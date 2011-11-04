@@ -24,17 +24,28 @@
         <script type="text/javascript" src="../../../../components/inlineEdit/js/InlineEdit.js"></script>
         <script type="text/javascript" src="../../../../components/undo/js/Undo.js"></script>
         
-        <title>Inline Edit: Default Configuration</title>
+        <title>Inline Edit: Textarea</title>
     </head>
     <body>
 
-        <div id="out-of-the-box">
+        <div id="text-area">
             <div class="flc-inlineEdit-text">This is the editable text.</div>
+
+            <!-- Add this markup to override the default <input> tag for editing -->
+            <span class="flc-inlineEdit-editContainer">
+                <textarea class="flc-inlineEdit-edit fl-inlineEdit-edit"></textarea>
+            </span>
         </div>
 
         <script type="text/javascript">
             jQuery(document).ready(function () {
-                var myInlineEdit = fluid.inlineEdit("#out-of-the-box");
+                var myInlineEdit = fluid.inlineEdit("#text-area", {
+                    strings: {
+                        // "Enter" won't end the edit session with a textarea,
+                        // so update the instructions
+                        editModeInstruction: "Escape to cancel, Tab when finished"
+                    }
+                });
             });
         </script>
     </body>
